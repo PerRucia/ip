@@ -1,10 +1,10 @@
-// src/main/java/commands/EventCommand.java
 package commands;
 
 import tasks.TaskList;
 import tasks.Event;
-import ui.Ui;
+import ui.Message;
 import utils.Storage;
+import utils.TaskStorageUtil;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -48,10 +48,10 @@ public class EventCommand implements Command {
      * saving the updated list to storage, and displaying appropriate messages to the user.
      *
      * @param taskList The current task list to which the new event task will be added.
-     * @param ui       The user interface for displaying messages.
+     * @param message  The message object to display messages on JavaFX.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList, Message message) {
         try {
             if (fromDateTimeString.length() == 10) {
                 fromDateTimeString += " 1200";  // Default time if only date is provided
@@ -63,28 +63,19 @@ public class EventCommand implements Command {
             }
             LocalDateTime toDateTime = LocalDateTime.parse(toDateTimeString, DATE_TIME_FORMATTER);
 
-            taskList.addTask(new Event(description, fromDateTime.toEpochSecond(ZoneOffset.UTC), toDateTime.toEpochSecond(ZoneOffset.UTC)));
-            saveTasks(taskList, ui);
+            taskList.addTask(new Event(description, fromDateTime.toEpochSecond(ZoneOffset.UTC),
+                    toDateTime.toEpochSecond(ZoneOffset.UTC)));
+            TaskStorageUtil.saveTasks(taskList, storage);
 
-            ui.showMessage("Added Event task - " + description + " (from: " + fromDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mma")) + " to: " + toDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mma")) + ")");
-            ui.showMessage("You now have " + taskList.getSize() + " task(s) in your list.");
+            message.addMessage("Added Event task - " + description + " (from: " +
+                    fromDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mma")) + " to: " +
+                    toDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mma")) + ")");
+            message.addMessage("You now have " + taskList.getSize() + " task(s) in your list.");
+            return message.getMessage();
         } catch (DateTimeParseException e) {
-            ui.showError("Invalid date format. Use: dd/MM/yyyy HHmm (e.g., 02/03/2019 1800)");
-        }
-    }
-
-    /**
-     * Saves the current tasks in the task list to persistent storage.
-     * Displays an error message if the save operation fails.
-     *
-     * @param taskList The task list containing tasks to be saved.
-     * @param ui       The user interface for displaying error messages.
-     */
-    private void saveTasks(TaskList taskList, Ui ui) {
-        try {
-            storage.saveTasksToFile(taskList.getTasks());
+            return Message.showError("Invalid date format. Use: dd/MM/yyyy HHmm (e.g., 02/03/2019 1800)");
         } catch (IOException e) {
-            ui.showMessage("Error saving tasks to file: " + e.getMessage());
+            return Message.showError(e.getMessage());
         }
     }
 }

@@ -1,9 +1,9 @@
-// src/main/java/commands/MarkCommand.java
 package commands;
 
 import tasks.TaskList;
-import ui.Ui;
+import ui.Message;
 import utils.Storage;
+import utils.TaskStorageUtil;
 import java.io.IOException;
 
 /**
@@ -38,35 +38,23 @@ public class MarkCommand implements Command {
      * If the task is already marked as done, an appropriate message is shown.
      *
      * @param taskList The current task list containing tasks to be updated.
-     * @param ui       The user interface for displaying messages.
+     * @param message  The message object to display messages.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList, Message message) {
         if (taskIndex < 0 || taskIndex >= taskList.getSize()) {
-            ui.showMessage("Invalid task index.");
-            return;
+            return Message.showError("Invalid task index.");
         }
         if (taskList.isTaskDone(taskIndex)) {
-            ui.showMessage("Task is already marked as done.");
-            return;
+            return Message.showError("Task is already marked as done.");
         }
         taskList.markTask(taskIndex);
-        saveTasks(taskList, ui);
-        ui.showMessage("Marked task as done - " + taskList.getTask(taskIndex));
-    }
-
-    /**
-     * Saves the current tasks in the task list to persistent storage.
-     * Displays an error message if the save operation fails.
-     *
-     * @param taskList The task list containing tasks to be saved.
-     * @param ui       The user interface for displaying error messages.
-     */
-    private void saveTasks(TaskList taskList, Ui ui) {
         try {
-            storage.saveTasksToFile(taskList.getTasks());
+            TaskStorageUtil.saveTasks(taskList, storage);
+            message.addMessage("Marked task as done - " + taskList.getTask(taskIndex));
         } catch (IOException e) {
-            ui.showMessage("Error saving tasks to file: " + e.getMessage());
+            return Message.showError(e.getMessage());
         }
+        return message.getMessage();
     }
 }

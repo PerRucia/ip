@@ -1,9 +1,7 @@
-// src/main/java/commands/ClearCommand.java
-
 package commands;
 
 import tasks.TaskList;
-import ui.Ui;
+import ui.Message;
 import utils.Storage;
 
 import java.io.IOException;
@@ -28,16 +26,18 @@ public class ClearCommand implements Command {
      * Executes the "clear" command, which clears all tasks from the task list and updates the storage.
      *
      * @param taskList The list of tasks to be cleared.
-     * @param ui The user interface to interact with the user.
+     * @param message The message object to display messages on JavaFX.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList, Message message) {
         taskList.clearTasks();
         try {
             storage.saveTasksToFile(taskList.getTasks());
-            ui.showMessage("All tasks have been cleared.");
+            message.addMessage("All tasks have been cleared.");
         } catch (IOException e) {
-            ui.showMessage("Error clearing tasks: " + e.getMessage());
+            return Message.showError(e.getMessage());
         }
+
+        return message.getMessage();
     }
 }

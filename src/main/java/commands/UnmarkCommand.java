@@ -1,13 +1,13 @@
-// src/main/java/commands/UnmarkCommand.java
 package commands;
 
 import tasks.TaskList;
-import ui.Ui;
+import ui.Message;
 import utils.Storage;
+import utils.TaskStorageUtil;
 import java.io.IOException;
 
 /**
- * Represents a command to unmark a task as done in the task list.
+ * Represents a command to unmark a task as not done in the task list.
  * Handles updating the task status, saving changes to storage,
  * and notifying the user.
  */
@@ -19,7 +19,7 @@ public class UnmarkCommand implements Command {
      * Constructs an UnmarkCommand with the specified task index from user input
      * and initializes the storage handler.
      *
-     * @param input   The user input containing the task number to unmark as done.
+     * @param input   The user input containing the task number to unmark as not done.
      * @param storage The storage handler to save the updated task list.
      * @throws IllegalArgumentException if the input does not contain a valid task number.
      */
@@ -33,40 +33,28 @@ public class UnmarkCommand implements Command {
     }
 
     /**
-     * Executes the unmark command by marking the specified task as not done,
+     * Executes the unmark command by unmarking the specified task as not done,
      * saving the updated task list to storage, and displaying a confirmation message.
-     * If the task is already not marked as done, an appropriate message is shown.
+     * If the task is already unmarked, an appropriate message is shown.
      *
      * @param taskList The current task list containing tasks to be updated.
-     * @param ui       The user interface for displaying messages.
+     * @param message  The message object to display messages.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList, Message message) {
         if (taskIndex < 0 || taskIndex >= taskList.getSize()) {
-            ui.showMessage("Invalid task index.");
-            return;
+            return Message.showError("Invalid task index.");
         }
         if (!taskList.isTaskDone(taskIndex)) {
-            ui.showMessage("Task is not marked as done.");
-            return;
+            return Message.showError("Task is already unmarked.");
         }
         taskList.unmarkTask(taskIndex);
-        saveTasks(taskList, ui);
-        ui.showMessage("Unmarked task - " + taskList.getTask(taskIndex));
-    }
-
-    /**
-     * Saves the current tasks in the task list to persistent storage.
-     * Displays an error message if the save operation fails.
-     *
-     * @param taskList The task list containing tasks to be saved.
-     * @param ui       The user interface for displaying error messages.
-     */
-    private void saveTasks(TaskList taskList, Ui ui) {
         try {
-            storage.saveTasksToFile(taskList.getTasks());
+            TaskStorageUtil.saveTasks(taskList, storage);
+            message.addMessage("Unmarked task as not done - " + taskList.getTask(taskIndex));
         } catch (IOException e) {
-            ui.showMessage("Error saving tasks to file: " + e.getMessage());
+            return Message.showError(e.getMessage());
         }
+        return message.getMessage();
     }
 }

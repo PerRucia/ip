@@ -1,9 +1,8 @@
-// src/main/java/commands/FindCommand.java
 package commands;
 
 import tasks.Task;
 import tasks.TaskList;
-import ui.Ui;
+import ui.Message;
 import utils.Storage;
 
 import java.util.List;
@@ -21,7 +20,7 @@ import java.util.stream.Collectors;
  * <pre>
  * {@code
  * FindCommand findCommand = new FindCommand("keyword1", "keyword2");
- * findCommand.execute(taskList, ui);
+ * findCommand.execute(taskList, message);
  * }
  * </pre>
  */
@@ -32,8 +31,14 @@ public class FindCommand implements Command {
         this.keywords = keywords;
     }
 
+    /**
+     * Executes the find command by searching for tasks that contain any of the specified keywords
+     * in their description. Displays the matching tasks or an appropriate message if no tasks are found.
+     * @param taskList The current task list to search for matching tasks.
+     * @param message  The message object to display messages on JavaFX.
+     */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList, Message message) {
         List<Task> matchingTasks = taskList.getTasks().stream()
                 .filter(task -> {
                     for (String keyword : keywords) {
@@ -46,12 +51,13 @@ public class FindCommand implements Command {
                 .collect(Collectors.toList());
 
         if (matchingTasks.isEmpty()) {
-            ui.showMessage("No tasks found with the keywords: " + String.join(", ", keywords));
+            message.addMessage("No tasks found with the keywords: " + String.join(", ", keywords));
         } else {
-            ui.showMessage("Tasks found with the keywords: " + String.join(", ", keywords));
+            message.addMessage("Tasks found with the keywords: " + String.join(", ", keywords));
             for (Task task : matchingTasks) {
-                ui.showMessage(task.toString());
+                message.addMessage(task.toString());
             }
         }
+        return message.getMessage();
     }
 }

@@ -1,10 +1,10 @@
-// src/main/java/commands/DeadlineCommand.java
 package commands;
 
 import tasks.TaskList;
 import tasks.Deadline;
-import ui.Ui;
+import ui.Message;
 import utils.Storage;
+import utils.TaskStorageUtil;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -45,36 +45,27 @@ public class DeadlineCommand implements Command {
      * saving the updated list to storage, and displaying appropriate messages to the user.
      *
      * @param taskList The current task list to which the new deadline task will be added.
-     * @param ui       The user interface for displaying messages.
+     * @param message The message object to display messages on JavaFX.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList, Message message) {
         try {
             if (dateTimeString.length() == 10) {
                 dateTimeString += " 1200";  // Default time if only date is provided
             }
             LocalDateTime dateTime = LocalDateTime.parse(dateTimeString.trim(), DATE_TIME_FORMATTER);
             taskList.addTask(new Deadline(taskDescription, dateTime.toEpochSecond(ZoneOffset.UTC)));
-            saveTasks(taskList, ui);
-            ui.showMessage("Added Deadline task - " + taskDescription + " (by: " + dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mma")) + ")");
-            ui.showMessage("You now have " + taskList.getSize() + " task(s) in your list.");
-        } catch (DateTimeParseException e) {
-            ui.showError("Invalid date format. Use: dd/MM/yyyy HHmm (e.g., 02/03/2019 1800)");
-        }
-    }
+            TaskStorageUtil.saveTasks(taskList, storage);
 
-    /**
-     * Saves the current tasks in the task list to persistent storage.
-     * Displays an error message if the save operation fails.
-     *
-     * @param taskList The task list containing tasks to be saved.
-     * @param ui       The user interface for displaying messages.
-     */
-    private void saveTasks(TaskList taskList, Ui ui) {
-        try {
-            storage.saveTasksToFile(taskList.getTasks());
+            message.addMessage("Added Deadline task - " + taskDescription + " (by: " +
+                    dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mma")) + ")\n" +
+                    "You now have " + taskList.getSize() + " task(s) in your list.");
+            return message.getMessage();
+
+        } catch (DateTimeParseException e) {
+            return Message.showError("Invalid date format. Use: dd/MM/yyyy HHmm (e.g., 02/03/2019 1800)");
         } catch (IOException e) {
-            ui.showMessage("Error saving tasks to file: " + e.getMessage());
+            return Message.showError(e.getMessage());
         }
     }
 }

@@ -1,12 +1,10 @@
-// src/main/java/commands/ListDayCommand.java
 package commands;
 
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
 import tasks.TaskList;
-import ui.Ui;
-import utils.Storage;
+import ui.Message;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -43,10 +41,10 @@ public class ListDayCommand implements Command {
      * Displays the list of matching tasks or a message if no tasks are found.
      *
      * @param taskList The current task list containing tasks to be filtered.
-     * @param ui       The user interface for displaying the filtered tasks.
+     * @param message  The message object to display messages on JavaFX.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList, Message message) {
         List<Task> tasksForDay = taskList.getTasks().stream()
                 .filter(task -> {
                     if (task instanceof Deadline) {
@@ -62,12 +60,13 @@ public class ListDayCommand implements Command {
                 .collect(Collectors.toList());
 
         if (tasksForDay.isEmpty()) {
-            ui.showMessage("No tasks found for " + date);
+            message.addMessage("No tasks found for " + date);
         } else {
-            ui.showMessage("Tasks for " + date + ":");
+            message.addMessage("Tasks for " + date + ":");
             for (Task task : tasksForDay) {
-                ui.showMessage(task.toString());
+                message.addMessage(task.toString());
             }
         }
+        return message.getMessage();
     }
 }

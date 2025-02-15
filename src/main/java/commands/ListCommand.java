@@ -1,8 +1,7 @@
-// src/main/java/commands/ListCommand.java
 package commands;
 
 import tasks.TaskList;
-import ui.Ui;
+import ui.Message;
 
 /**
  * Represents a command to display all tasks in the task list.
@@ -15,17 +14,18 @@ public class ListCommand implements Command {
      * If the task list is empty, an appropriate message is shown.
      *
      * @param taskList The current task list containing tasks to be displayed.
-     * @param ui       The user interface for displaying the task list.
+     * @param message  The message object to display messages on JavaFX.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList, Message message) {
         if (taskList.getSize() == 0) {
-            ui.showMessage("Your task list is empty.");
+            message.addMessage("Your task list is empty.");
         } else {
-            ui.showMessage("Here are the tasks in your list:");
+            message.addMessage("Here are the tasks in your list:");
             for (int i = 0; i < taskList.getSize(); i++) {
-                ui.showMessage((i + 1) + ". " + taskList.getTask(i));
+                message.addMessage((i + 1) + ". " + taskList.getTask(i));
             }
         }
+        return message.getMessage();
     }
 }

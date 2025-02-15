@@ -1,9 +1,7 @@
-// src/main/java/commands/CheerCommand.java
 package commands;
 
 import tasks.TaskList;
-import ui.Ui;
-import utils.Storage;
+import ui.Message;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -34,23 +32,25 @@ public class CheerCommand implements Command {
      * with random color and italic formatting.
      *
      * @param taskList The task list (not used in this command).
-     * @param ui The UI instance used to display messages.
+     * @param message The message object to display messages on JavaFX.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList, Message message) {
         try {
             List<String> quotes = Files.readAllLines(Paths.get(FILE_PATH));
             if (quotes.isEmpty()) {
-                ui.showMessage("No quotes available.");
+                message.addMessage("No quotes available.");
             } else {
                 Random random = new Random();
                 String randomQuote = quotes.get(random.nextInt(quotes.size()));
                 String randomColor = ANSI_COLORS[random.nextInt(ANSI_COLORS.length)];
                 String formattedQuote = randomColor + ANSI_ITALIC + randomQuote + ANSI_RESET;
-                ui.showMessage(formattedQuote);
+                message.addMessage(formattedQuote);
             }
         } catch (IOException e) {
-            ui.showMessage("Error reading quotes: " + e.getMessage());
+            return Message.showError(e.getMessage());
         }
+
+        return message.getMessage();
     }
 }

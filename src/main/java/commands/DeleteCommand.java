@@ -1,9 +1,9 @@
-// src/main/java/commands/DeleteCommand.java
 package commands;
 
 import tasks.TaskList;
-import ui.Ui;
+import ui.Message;
 import utils.Storage;
+import utils.TaskStorageUtil;
 import java.io.IOException;
 
 /**
@@ -36,33 +36,24 @@ public class DeleteCommand implements Command {
      * saving the updated list to storage, and displaying appropriate messages to the user.
      *
      * @param taskList The current task list from which the task will be deleted.
-     * @param ui       The user interface for displaying messages.
+     * @param message The message object to display messages on JavaFX.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList, Message message) {
         if (taskIndex < 0 || taskIndex >= taskList.getSize()) {
-            ui.showMessage("Invalid task index.");
-            return;
+            return Message.showError("Invalid task index.");
         }
         String taskDescription = taskList.getTask(taskIndex).getDescription();
         taskList.deleteTask(taskIndex);
-        saveTasks(taskList, ui);
-        ui.showMessage("Deleted task - " + taskDescription);
-        ui.showMessage("You now have " + taskList.getSize() + " task(s) in your list.");
-    }
-
-    /**
-     * Saves the current tasks in the task list to persistent storage.
-     * Displays an error message if the save operation fails.
-     *
-     * @param taskList The task list containing tasks to be saved.
-     * @param ui       The user interface for displaying error messages.
-     */
-    private void saveTasks(TaskList taskList, Ui ui) {
         try {
-            storage.saveTasksToFile(taskList.getTasks());
+            TaskStorageUtil.saveTasks(taskList, storage);
         } catch (IOException e) {
-            ui.showMessage("Error saving tasks to file: " + e.getMessage());
+            return Message.showError(e.getMessage());
         }
+
+        message.addMessage("Deleted task - " + taskDescription);
+        message.addMessage("You now have " + taskList.getSize() + " task(s) in your list.");
+
+        return message.getMessage();
     }
 }

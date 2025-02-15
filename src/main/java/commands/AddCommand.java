@@ -3,7 +3,7 @@ package commands;
 
 import tasks.TaskList;
 import tasks.ToDo;
-import ui.Ui;
+import ui.Message;
 import utils.Storage;
 import java.io.IOException;
 
@@ -29,17 +29,19 @@ public class AddCommand implements Command {
      * Executes the command to add a ToDo task to the task list and save it to storage.
      *
      * @param taskList The task list to add the task to.
-     * @param ui The UI to interact with the user.
+     * @param message The message object to display messages on JavaFX.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList, Message message) {
         taskList.addTask(new ToDo(taskDescription));
         try {
             storage.saveTasksToFile(taskList.getTasks());
         } catch (IOException e) {
-            ui.showMessage("Error saving tasks to file: " + e.getMessage());
+            return Message.showError(e.getMessage());
         }
-        ui.showMessage("Added ToDo task - " + taskDescription);
-        ui.showMessage("You now have " + taskList.getSize() + " task(s) in your list.");
+        message.addMessage("Added ToDo task - " + taskDescription);
+        message.addMessage("You now have " + taskList.getSize() + " task(s) in your list.");
+
+        return message.getMessage();
     }
 }

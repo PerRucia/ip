@@ -14,7 +14,12 @@ public class Message {
      * @param newMessage The new message to be added.
      */
     public void addMessage(String newMessage) {
-        message += "\n" + newMessage;
+        if (message.isEmpty()) {
+            message = newMessage;
+        }
+        else {
+            message += "\n" + newMessage;
+        }
     }
 
     /**

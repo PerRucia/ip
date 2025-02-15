@@ -1,3 +1,4 @@
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -59,5 +60,9 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getRuciaDialog(response, ruciaImage)
         );
         userInput.clear();
+
+        if (input.equalsIgnoreCase("bye")) {
+            Platform.exit();
+        }
     }
 }

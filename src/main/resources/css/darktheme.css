@@ -1,0 +1,55 @@
+/* darktheme.css */
+.root {
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-background-color: #2b2b2b;
+    -fx-text-fill: #e8e6e3;
+}
+
+/* Style for labels */
+.label {
+    -fx-text-fill: #e8e6e3;
+}
+
+/* Style for buttons */
+.button {
+    -fx-background-color: #3c3f41;
+    -fx-text-fill: #a9b7c6;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+
+/* Style for text fields */
+.text-field {
+    -fx-background-color: #3c3f41;
+    -fx-text-fill: #e8e6e3;
+    -fx-prompt-text-fill: #606366;
+    -fx-background-radius: 8;
+    -fx-border-color: #5c5c5c;
+}
+
+/* Style for the scroll pane */
+.scroll-pane {
+    -fx-background: #2b2b2b;
+}
+
+/* Style for custom dialog boxes */
+.dialog-box {
+    -fx-background-color: #3c3f41;
+    -fx-background-radius: 8;
+    -fx-padding: 10;
+}
+
+.dialog-box .label {
+    -fx-text-fill: #e8e6e3;
+}
+
+.send-button {
+    -fx-background-color: #337ab7;
+    -fx-text-fill: #ffffff;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+.send-button:hover {
+    -fx-background-color: #286090;
+}
+

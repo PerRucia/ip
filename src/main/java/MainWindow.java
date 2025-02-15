@@ -28,6 +28,17 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        showWelcomeMessage();
+    }
+
+    /**
+     * Displays the welcome message from Rucia.
+     */
+    private void showWelcomeMessage() {
+        String welcomeMessage = rucia.getWelcomeMessage();
+        dialogContainer.getChildren().add(
+                DialogBox.getRuciaDialog(welcomeMessage, ruciaImage)
+        );
     }
 
     /** Injects the Rucia instance */

@@ -49,4 +49,11 @@ public class Rucia {
             }
         }
     }
+
+    /**
+     * Generates a response for the user's chat message.
+     */
+    public String getResponse(String input) {
+        return "Rucia heard: " + input;
+    }
 }

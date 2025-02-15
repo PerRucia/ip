@@ -44,7 +44,7 @@ test {
 }
 
 application {
-    mainClass = 'rucia.Rucia' // Fully qualified class name if inside a package
+    mainClass.set("Launcher")
 }
 
 shadowJar {

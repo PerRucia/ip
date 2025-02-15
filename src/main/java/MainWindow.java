@@ -28,7 +28,6 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        showWelcomeMessage();
     }
 
     /**
@@ -44,6 +43,7 @@ public class MainWindow extends AnchorPane {
     /** Injects the Rucia instance */
     public void setRucia(Rucia r) {
         rucia = r;
+        showWelcomeMessage();
     }
 
     /**

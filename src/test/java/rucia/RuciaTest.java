@@ -186,19 +186,21 @@ public class RuciaTest {
         // Add some tasks to the task list
         taskList.addTask(new ToDo("Get Breakfast"));
         taskList.addTask(new ToDo("Buy Bread"));
+        taskList.addTask(new ToDo("Read Book"));
 
-        String input = "find Bread";
+        String input = "find Bread Book";
         String commandType = CommandIdentifier.identify(input);
         Command command = CommandParser.parse(input, commandType, storage);
 
         command.execute(taskList, ui);
 
         ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
-        verify(ui, times(2)).showMessage(captor.capture());
+        verify(ui, times(3)).showMessage(captor.capture());
         List<String> capturedMessages = captor.getAllValues();
 
-        assertEquals("Tasks found with the keyword: Bread", capturedMessages.get(0));
+        assertEquals("Tasks found with the keywords: Bread, Book", capturedMessages.get(0));
         assertEquals("[T][ ] Buy Bread", capturedMessages.get(1));
+        assertEquals("[T][ ] Read Book", capturedMessages.get(2));
     }
 
     @Test

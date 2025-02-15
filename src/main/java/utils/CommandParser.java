@@ -60,13 +60,13 @@ public class CommandParser {
                 return new HelpCommand();
             case "clear":
                 return new ClearCommand(storage);
-            case "find": // Add this case
-                String keyword = input.substring(4).trim();
-                if (keyword.isEmpty()) {
-                    throw new IllegalArgumentException("Keyword cannot be empty. Use: find <keyword>");
+            case "find":
+                String[] keywords = input.substring(4).trim().split("\\s+");
+                if (keywords.length == 0) {
+                    throw new IllegalArgumentException("Keyword(s) cannot be empty. Use: find <keyword1> <keyword2> ...");
                 }
-                return new FindCommand(keyword);
-            case "cheer": // Add this case
+                return new FindCommand(keywords);
+            case "cheer":
                 return new CheerCommand();
             default:
                 throw new IllegalArgumentException("Unknown command type.");

@@ -1,11 +1,10 @@
-// src/main/java/tasks/TaskList.java
 package rucia.tasks;
 
 import java.util.ArrayList;
 
 /**
- * Represents a list of tasks, providing methods to manage tasks such as adding,
- * deleting, marking as done, and unmarking. Handles common operations on the task list.
+ * Represents a list of tasks and notes, providing methods to manage tasks and notes such as adding,
+ * deleting, marking as done, and unmarking. Handles common operations on the task list and note list.
  */
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -18,29 +17,30 @@ public class TaskList {
     }
 
     /**
-     * Constructs a TaskList with an existing list of tasks.
+     * Constructs a TaskList with an existing list of tasks and notes.
      *
      * @param tasks The list of tasks to initialize the TaskList with.
+     *
      */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
+    // Task-related methods
+
     /**
-     * Adds a new task to the task list.
-     *
-     * @param task The task to be added.
+     * Adds a task to the task list.
+     * @param task The task to add.
      */
     public void addTask(Task task) {
         tasks.add(task);
     }
 
     /**
-     * Deletes a task from the task list based on its index.
-     *
-     * @param index The index of the task to be deleted.
-     * @return The deleted task.
-     * @throws IndexOutOfBoundsException if the index is invalid.
+     * Deletes the task at the specified index.
+     * @param index The index of the task to delete.
+     * @return The task that was deleted.
+     * @throws IndexOutOfBoundsException if the index is out of bounds.
      */
     public Task deleteTask(int index) {
         if (index >= 0 && index < tasks.size()) {
@@ -51,11 +51,10 @@ public class TaskList {
     }
 
     /**
-     * Retrieves a task from the task list based on its index.
-     *
-     * @param index The index of the task to retrieve.
+     * Returns the task at the specified index.
+     * @param index The index of the task to return.
      * @return The task at the specified index.
-     * @throws IndexOutOfBoundsException if the index is invalid.
+     * @throws IndexOutOfBoundsException if the index is out of bounds.
      */
     public Task getTask(int index) {
         if (index >= 0 && index < tasks.size()) {
@@ -67,16 +66,14 @@ public class TaskList {
 
     /**
      * Returns the number of tasks in the task list.
-     *
-     * @return The size of the task list.
+     * @return The number of tasks in the task list.
      */
     public int getSize() {
         return tasks.size();
     }
 
     /**
-     * Retrieves the list of all tasks.
-     *
+     * Returns the list of tasks.
      * @return The list of tasks.
      */
     public ArrayList<Task> getTasks() {
@@ -91,10 +88,8 @@ public class TaskList {
     }
 
     /**
-     * Marks a task as done based on its index.
-     *
-     * @param index The index of the task to mark as done.
-     * @throws IndexOutOfBoundsException if the index is invalid.
+     * Marks the task at the specified index as done.
+     * @param index
      */
     public void markTask(int index) {
         if (index >= 0 && index < tasks.size()) {
@@ -105,10 +100,8 @@ public class TaskList {
     }
 
     /**
-     * Unmarks a task (marks it as not done) based on its index.
-     *
-     * @param index The index of the task to unmark.
-     * @throws IndexOutOfBoundsException if the index is invalid.
+     * Unmarks the task at the specified index as not done.
+     * @param index
      */
     public void unmarkTask(int index) {
         if (index >= 0 && index < tasks.size()) {
@@ -119,11 +112,11 @@ public class TaskList {
     }
 
     /**
-     * Checks if a task is marked as done based on its index.
+     * Checks if the task at the specified index is marked as done.
      *
      * @param index The index of the task to check.
-     * @return true if the task is done, false otherwise.
-     * @throws IndexOutOfBoundsException if the index is invalid.
+     * @return true if the task is marked as done, false otherwise.
+     * @throws IndexOutOfBoundsException if the index is out of bounds.
      */
     public boolean isTaskDone(int index) {
         if (index >= 0 && index < tasks.size()) {

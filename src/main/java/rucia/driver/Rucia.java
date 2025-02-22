@@ -25,7 +25,7 @@ public class Rucia {
     public Rucia() {
         storage = new Storage("data/tasks.txt");
         try {
-            taskList = new TaskList(storage.loadTasksFromFile());
+            taskList = new TaskList(storage.loadFromFile());
         } catch (IOException e) {
             taskList = new TaskList();
         }

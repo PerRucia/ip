@@ -1,10 +1,7 @@
 // src/main/java/utils/Storage.java
 package rucia.utils;
 
-import rucia.tasks.Deadline;
-import rucia.tasks.Event;
-import rucia.tasks.Task;
-import rucia.tasks.ToDo;
+import rucia.tasks.*;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -52,7 +49,7 @@ public class Storage {
      * @param tasks The list of tasks to save.
      * @throws IOException If an I/O error occurs while writing to the file.
      */
-    public void saveTasksToFile(List<Task> tasks) throws IOException {
+    public void saveToFile(List<Task> tasks) throws IOException {
         List<String> lines = new ArrayList<>();
         for (Task task : tasks) {
             lines.add(task.toFileString());
@@ -66,7 +63,7 @@ public class Storage {
      * @return A list of tasks loaded from the file.
      * @throws IOException If an I/O error occurs while reading the file.
      */
-    public ArrayList<Task> loadTasksFromFile() throws IOException {
+    public ArrayList<Task> loadFromFile() throws IOException {
         ArrayList<Task> tasks = new ArrayList<>();
         List<String> lines = Files.readAllLines(Paths.get(filePath));
         for (String line : lines) {

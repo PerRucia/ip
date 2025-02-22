@@ -12,6 +12,7 @@ public class CommandParser {
     private static final int DEADLINE_COMMAND_LENGTH = 8;
     private static final int EVENT_COMMAND_LENGTH = 5;
     private static final int FIND_COMMAND_LENGTH = 4;
+    private static final int NOTE_COMMAND_LENGTH = 4;
 
     /**
      * Parses the user input and returns the corresponding command object.
@@ -72,6 +73,12 @@ public class CommandParser {
                 return new FindCommand(keywords);
             case "cheer":
                 return new CheerCommand();
+            case "note":
+                String[] noteParts = input.substring(NOTE_COMMAND_LENGTH).trim().split(" \\| ");
+                if (noteParts.length < 2) {
+                    throw new IllegalArgumentException("Invalid input format. Use: note <Title> | <Description>");
+                }
+                return new NoteCommand(noteParts[0].trim(), noteParts[1].trim(), storage);
             default:
                 throw new IllegalArgumentException("Unknown command type.");
         }

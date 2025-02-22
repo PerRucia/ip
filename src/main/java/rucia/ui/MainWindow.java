@@ -45,6 +45,7 @@ public class MainWindow extends AnchorPane {
 
     /** Injects the Rucia instance */
     public void setRucia(Rucia r) {
+        assert r != null : "Rucia instance should not be null";
         rucia = r;
         showWelcomeMessage();
     }
@@ -56,6 +57,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        assert input != null && !input.isEmpty() : "User input should not be null or empty";
         String response = rucia.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, USER_IMAGE),

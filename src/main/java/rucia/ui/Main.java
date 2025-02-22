@@ -17,6 +17,7 @@ public class Main extends Application {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
+            assert ap != null : "AnchorPane should not be null";
             Scene scene = new Scene(ap);
             // Load the dark theme CSS
             scene.getStylesheets().add(Main.class.getResource("/css/darktheme.css").toExternalForm());

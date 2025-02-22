@@ -1,25 +1,26 @@
 package rucia.ui;
 
- /**
-  * The Message class contains static methods to generate messages for JavaFX GUI.
-  */
- public class Message {
-     private StringBuilder message = new StringBuilder();
+/**
+ * The Message class contains static methods to generate messages for JavaFX GUI.
+ */
+public class Message {
+    private StringBuilder message = new StringBuilder();
 
      public Message() {}
 
-     /**
-      * Adds a new message to the existing message string.
-      *
-      * @param newMessage The new message to be added.
-      */
-     public void addMessage(String newMessage) {
-         if (message.length() == 0) {
-             message.append(newMessage);
-         } else {
-             message.append("\n").append(newMessage);
-         }
-     }
+    /**
+     * Adds a new message to the existing message string.
+     *
+     * @param newMessage The new message to be added.
+     */
+    public void addMessage(String newMessage) {
+        assert newMessage != null : "New message should not be null";
+        if (message.isEmpty()) {
+            message.append(newMessage);
+        } else {
+            message.append("\n").append(newMessage);
+        }
+    }
 
      /**
       * Retrieves the current message string.

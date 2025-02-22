@@ -61,10 +61,10 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         assert input != null && !input.isEmpty() : "User input should not be null or empty";
         String response = rucia.getResponse(input);
-        Stream.of(
+        dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, USER_IMAGE),
                 DialogBox.getRuciaDialog(response, RUCIA_IMAGE)
-        ).forEach(dialogContainer.getChildren()::add);
+        );
         userInput.clear();
 
         if (input.equalsIgnoreCase("bye")) {

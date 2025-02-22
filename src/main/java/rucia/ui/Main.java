@@ -10,7 +10,7 @@ import rucia.driver.Rucia;
 
 public class Main extends Application {
 
-    private Rucia rucia = new Rucia();
+    private final Rucia rucia = new Rucia();
 
     @Override
     public void start(Stage stage) {
@@ -26,7 +26,7 @@ public class Main extends Application {
             stage.setTitle("Rucia ChatBot");
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace();  // Consider using a logging framework
         }
     }
 }

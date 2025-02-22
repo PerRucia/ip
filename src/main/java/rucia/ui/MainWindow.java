@@ -10,6 +10,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import rucia.driver.Rucia;
 
+import java.util.stream.Stream;
+
 /**
  * Controller for the main GUI.
  */

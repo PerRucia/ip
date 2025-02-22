@@ -25,8 +25,8 @@ public class MainWindow extends AnchorPane {
 
     private Rucia rucia;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private Image ruciaImage = new Image(this.getClass().getResourceAsStream("/images/rucia.png"));
+    private static final Image USER_IMAGE = new Image(MainWindow.class.getResourceAsStream("/images/user.png"));
+    private static final Image RUCIA_IMAGE = new Image(MainWindow.class.getResourceAsStream("/images/rucia.png"));
 
     @FXML
     public void initialize() {
@@ -39,7 +39,7 @@ public class MainWindow extends AnchorPane {
     private void showWelcomeMessage() {
         String welcomeMessage = rucia.getWelcomeMessage();
         dialogContainer.getChildren().add(
-                DialogBox.getRuciaDialog(welcomeMessage, ruciaImage)
+                DialogBox.getRuciaDialog(welcomeMessage, RUCIA_IMAGE)
         );
     }
 
@@ -50,16 +50,16 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Rucia's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Handles user input by creating dialog boxes for user input and Rucia's response.
+     * Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
         String response = rucia.getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getRuciaDialog(response, ruciaImage)
+                DialogBox.getUserDialog(input, USER_IMAGE),
+                DialogBox.getRuciaDialog(response, RUCIA_IMAGE)
         );
         userInput.clear();
 

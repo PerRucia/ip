@@ -14,6 +14,7 @@ public class Message {
      * @param newMessage The new message to be added.
      */
     public void addMessage(String newMessage) {
+        assert newMessage != null : "New message should not be null";
         if (message.isEmpty()) {
             message = newMessage;
         }

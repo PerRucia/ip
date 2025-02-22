@@ -17,3 +17,10 @@ The generated code was quite accurate and usually required only minor modificati
 - Manual tracing of the code to find the problem would otherwise have been very time-consuming.
 
 ### Week 5 Tasks
+- JavaFX was introduced in Week 5, which was a new concept for me. So the tasks this week were implemented manually, with input from GPT and Copilot for bug fixes and error debugging.
+- Additionally, I also asked GPT for ideas and ways to make the ChatBot more aesthetically pleasing and user-friendly.
+
+### Week 6 Tasks
+- Tasks were relatively simple this week, with most of the work involving pull requests and merging them into the main branch.
+- However, a couple of bugs were missed when transitioning from a text-based interface to the JavaFX GUI.
+- GPT was able to quickly explain the issue, identify the problematic code, and suggest a fix.

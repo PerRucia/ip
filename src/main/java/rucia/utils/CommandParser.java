@@ -1,4 +1,3 @@
-// src/main/java/utils/CommandParser.java
 package rucia.utils;
 
 import rucia.commands.*;
@@ -8,6 +7,12 @@ import rucia.commands.*;
  * Determines the appropriate command to execute based on the input and command type.
  */
 public class CommandParser {
+
+    private static final int ADD_COMMAND_LENGTH = 3;
+    private static final int DEADLINE_COMMAND_LENGTH = 8;
+    private static final int EVENT_COMMAND_LENGTH = 5;
+    private static final int FIND_COMMAND_LENGTH = 4;
+    private static final int NOTE_COMMAND_LENGTH = 4;
 
     /**
      * Parses the user input and returns the corresponding command object.
@@ -23,19 +28,19 @@ public class CommandParser {
             case "bye":
                 return new ByeCommand();
             case "add":
-                String taskDescription = input.substring(3).trim();
+                String taskDescription = input.substring(ADD_COMMAND_LENGTH).trim();
                 if (taskDescription.isEmpty()) {
                     throw new IllegalArgumentException("Task description cannot be empty. Use: add <task description>");
                 }
                 return new AddCommand(taskDescription, storage);
             case "deadline":
-                String[] parts = input.substring(8).trim().split(" /by ");
+                String[] parts = input.substring(DEADLINE_COMMAND_LENGTH).trim().split(" /by ");
                 if (parts.length < 2) {
                     throw new IllegalArgumentException("Invalid input format. Use: deadline <task> /by <date>");
                 }
                 return new DeadlineCommand(parts[0].trim(), parts[1].trim(), storage);
             case "event":
-                String[] eventParts = input.substring(5).trim().split(" /from ");
+                String[] eventParts = input.substring(EVENT_COMMAND_LENGTH).trim().split(" /from ");
                 if (eventParts.length < 2) {
                     throw new IllegalArgumentException("Invalid input format. Use: event <task> /from <start> /to <end>");
                 }
@@ -61,13 +66,19 @@ public class CommandParser {
             case "clear":
                 return new ClearCommand(storage);
             case "find":
-                String[] keywords = input.substring(4).trim().split("\\s+");
+                String[] keywords = input.substring(FIND_COMMAND_LENGTH).trim().split("\\s+");
                 if (keywords.length == 0) {
                     throw new IllegalArgumentException("Keyword(s) cannot be empty. Use: find <keyword1> <keyword2> ...");
                 }
                 return new FindCommand(keywords);
             case "cheer":
                 return new CheerCommand();
+            case "note":
+                String[] noteParts = input.substring(NOTE_COMMAND_LENGTH).trim().split(" \\| ");
+                if (noteParts.length < 2) {
+                    throw new IllegalArgumentException("Invalid input format. Use: note <Title> | <Description>");
+                }
+                return new NoteCommand(noteParts[0].trim(), noteParts[1].trim(), storage);
             default:
                 throw new IllegalArgumentException("Unknown command type.");
         }

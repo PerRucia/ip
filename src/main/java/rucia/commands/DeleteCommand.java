@@ -51,8 +51,8 @@ public class DeleteCommand implements Command {
             return Message.showError(e.getMessage());
         }
 
-        message.addMessage("Deleted task - " + taskDescription);
-        message.addMessage("You now have " + taskList.getSize() + " task(s) in your list.");
+        message.addMessage("Deleted entry - " + taskDescription);
+        message.addMessage("You now have " + taskList.getSize() + " entries in your list.");
 
         return message.getMessage();
     }

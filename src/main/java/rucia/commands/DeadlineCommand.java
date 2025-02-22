@@ -59,7 +59,7 @@ public class DeadlineCommand implements Command {
 
             message.addMessage("Added Deadline task - " + taskDescription + " (by: " +
                     dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mma")) + ")\n" +
-                    "You now have " + taskList.getSize() + " task(s) in your list.");
+                    "You now have " + taskList.getSize() + " entries in your list.");
             return message.getMessage();
 
         } catch (DateTimeParseException e) {

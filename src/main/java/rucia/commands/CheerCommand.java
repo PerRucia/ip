@@ -15,21 +15,9 @@ import java.util.Random;
  */
 public class CheerCommand implements Command {
     private static final String FILE_PATH = "./data/cheer.txt";
-    private static final String ANSI_RESET = "\u001B[0m";
-    private static final String ANSI_ITALIC = "\u001B[3m";
-    private static final String[] ANSI_COLORS = {
-            "\u001B[33m", // Yellow
-            "\u001B[32m", // Green
-            "\u001B[31m", // Red
-            "\u001B[34m", // Blue
-            "\u001B[35m", // Purple
-            "\u001B[36m", // Cyan (used as Orange)
-            "\u001B[95m"  // Bright Magenta (used as Pink)
-    };
 
     /**
-     * Executes the CheerCommand, which reads a random quote from the file and displays it
-     * with random color and italic formatting.
+     * Executes the CheerCommand, which reads a random quote from the file and displays it.
      *
      * @param taskList The task list (not used in this command).
      * @param message The message object to display messages on JavaFX.
@@ -43,9 +31,7 @@ public class CheerCommand implements Command {
             } else {
                 Random random = new Random();
                 String randomQuote = quotes.get(random.nextInt(quotes.size()));
-                String randomColor = ANSI_COLORS[random.nextInt(ANSI_COLORS.length)];
-                String formattedQuote = randomColor + ANSI_ITALIC + randomQuote + ANSI_RESET;
-                message.addMessage(formattedQuote);
+                message.addMessage(randomQuote);
             }
         } catch (IOException e) {
             return Message.showError(e.getMessage());

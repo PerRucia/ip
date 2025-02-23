@@ -19,9 +19,9 @@ public class ListCommand implements Command {
     @Override
     public String execute(TaskList taskList, Message message) {
         if (taskList.getSize() == 0) {
-            message.addMessage("Your task list is empty.");
+            message.addMessage("Your task list is empty. Try adding something first.");
         } else {
-            message.addMessage("Here are the tasks in your list:");
+            message.addMessage("Here are your tasks. Try not to forget them:");
             for (int i = 0; i < taskList.getSize(); i++) {
                 message.addMessage((i + 1) + ". " + taskList.getTask(i));
             }

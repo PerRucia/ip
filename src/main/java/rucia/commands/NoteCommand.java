@@ -36,7 +36,8 @@ public class NoteCommand implements Command {
     public String execute(TaskList taskList, Message message) {
         Note note = new Note(title, description);
         taskList.addTask(note);
-        message.addMessage("You now have " + taskList.getSize() + " entries in your list.");
+        message.addMessage("You now have " + taskList.getSize() + " entries in your list." +
+                " Impressive, I guess.");
         return message.getMessage();
     }
 }

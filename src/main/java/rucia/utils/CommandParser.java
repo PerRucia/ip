@@ -30,24 +30,28 @@ public class CommandParser {
             case "add":
                 String taskDescription = input.substring(ADD_COMMAND_LENGTH).trim();
                 if (taskDescription.isEmpty()) {
-                    throw new IllegalArgumentException("Task description cannot be empty. Use: add <task description>");
+                    throw new IllegalArgumentException("Task description cannot be empty. Use: add <task " +
+                            "description>. It's not rocket science.");
                 }
                 return new AddCommand(taskDescription, storage);
             case "deadline":
                 String[] parts = input.substring(DEADLINE_COMMAND_LENGTH).trim().split(" /by ");
                 if (parts.length < 2) {
-                    throw new IllegalArgumentException("Invalid input format. Use: deadline <task> /by <date>");
+                    throw new IllegalArgumentException("Invalid input format. Use: deadline <task> /by <date>. " +
+                            "Seriously, how hard is it?");
                 }
                 return new DeadlineCommand(parts[0].trim(), parts[1].trim(), storage);
             case "event":
                 String[] eventParts = input.substring(EVENT_COMMAND_LENGTH).trim().split(" /from ");
                 if (eventParts.length < 2) {
-                    throw new IllegalArgumentException("Invalid input format. Use: event <task> /from <start> /to <end>");
+                    throw new IllegalArgumentException("Invalid input format. Use: event <task> /from <start> /to " +
+                            "<end>. Pay attention!");
                 }
                 String description = eventParts[0];
                 String[] timeParts = eventParts[1].split(" /to ");
                 if (timeParts.length < 2) {
-                    throw new IllegalArgumentException("Invalid input format. Use: event <task> /from <start> /to <end>");
+                    throw new IllegalArgumentException("Invalid input format. Use: event <task> /from <start> /to " +
+                            "<end>. It's not that complicated.");
                 }
                 return new EventCommand(description, timeParts[0].trim(), timeParts[1].trim(), storage);
             case "list":
@@ -68,7 +72,8 @@ public class CommandParser {
             case "find":
                 String[] keywords = input.substring(FIND_COMMAND_LENGTH).trim().split("\\s+");
                 if (keywords.length == 0) {
-                    throw new IllegalArgumentException("Keyword(s) cannot be empty. Use: find <keyword1> <keyword2> ...");
+                    throw new IllegalArgumentException("Keyword(s) cannot be empty. Use: find <keyword1> <keyword2> " +
+                            "... Come on, it's not that hard.");
                 }
                 return new FindCommand(keywords);
             case "cheer":
@@ -76,11 +81,12 @@ public class CommandParser {
             case "note":
                 String[] noteParts = input.substring(NOTE_COMMAND_LENGTH).trim().split(" \\| ");
                 if (noteParts.length < 2) {
-                    throw new IllegalArgumentException("Invalid input format. Use: note <Title> | <Description>");
+                    throw new IllegalArgumentException("Invalid input format. Use: note <Title> | " +
+                            "<Description>. Try to keep up.");
                 }
                 return new NoteCommand(noteParts[0].trim(), noteParts[1].trim(), storage);
             default:
-                throw new IllegalArgumentException("Unknown command type.");
+                throw new IllegalArgumentException("Unknown command type. Are you even trying?");
         }
     }
 }

@@ -40,7 +40,7 @@ public class AddCommand implements Command {
             return Message.showError(e.getMessage());
         }
         message.addMessage("Added ToDo task - " + taskDescription);
-        message.addMessage("You now have " + taskList.getSize() + " entries in your list.");
+        message.addMessage("You now have " + taskList.getSize() + " entries in your list. Impressive, I guess.");
 
         return message.getMessage();
     }

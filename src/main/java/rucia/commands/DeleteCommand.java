@@ -3,31 +3,23 @@ package rucia.commands;
 import rucia.tasks.TaskList;
 import rucia.ui.Message;
 import rucia.utils.Storage;
-import rucia.utils.TaskStorageUtil;
 import java.io.IOException;
 
 /**
  * Represents a command to delete a task from the task list.
- * Handles the removal of a task by its index and updates the storage accordingly.
  */
 public class DeleteCommand implements Command {
-    private int taskIndex;
+    private String input;
     private Storage storage;
 
     /**
-     * Constructs a DeleteCommand with the specified input string and storage handler.
-     * Extracts the task index from the input.
+     * Constructs a DeleteCommand with the specified input and storage.
      *
-     * @param input   The user input containing the task number to delete.
-     * @param storage The storage handler to update the task list after deletion.
-     * @throws IllegalArgumentException if the input does not contain a valid task number.
+     * @param input The input string containing the task number to be deleted.
+     * @param storage The storage to save the updated task list.
      */
     public DeleteCommand(String input, Storage storage) {
-        try {
-            this.taskIndex = Integer.parseInt(input.substring(6).trim()) - 1;
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Invalid input. Please provide a valid task number.");
-        }
+        this.input = input;
         this.storage = storage;
     }
 
@@ -40,20 +32,20 @@ public class DeleteCommand implements Command {
      */
     @Override
     public String execute(TaskList taskList, Message message) {
-        if (taskIndex < 0 || taskIndex >= taskList.getSize()) {
-            return Message.showError("Invalid task index.");
-        }
-        String taskDescription = taskList.getTask(taskIndex).getDescription();
-        taskList.deleteTask(taskIndex);
         try {
-            TaskStorageUtil.saveTasks(taskList, storage);
+            int taskIndex = Integer.parseInt(input.split(" ")[1]) - 1;
+            String taskDescription = taskList.getTask(taskIndex).toString();
+            taskList.deleteTask(taskIndex);
+            storage.saveToFile(taskList.getTasks());
+
+            message.addMessage("Deleted task - " + taskDescription + ". Cleaning up your mess, I see.");
+            message.addMessage("You now have " + taskList.getSize() + " entries in your list.");
+            return message.getMessage();
+
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            return Message.showError("Invalid task number. Pay attention!");
         } catch (IOException e) {
             return Message.showError(e.getMessage());
         }
-
-        message.addMessage("Deleted entry - " + taskDescription);
-        message.addMessage("You now have " + taskList.getSize() + " entries in your list.");
-
-        return message.getMessage();
     }
 }

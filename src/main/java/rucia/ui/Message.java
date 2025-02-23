@@ -38,9 +38,9 @@ public class Message {
       */
      public static String showWelcome() {
          return """
-                 Hello! I'm Rucia
-                 How can I assist you today?
-                 Send "Help" or "?" for instructions on how to use me!""";
+                Oh, it's you again. I'm Rucia.
+                What do you want this time?
+                Type "Help" or "?" if you can't figure it out yourself.""";
      }
 
      /**
@@ -49,7 +49,7 @@ public class Message {
       * @return The exit message.
       */
      public static String showExit() {
-         return "Bye. Hope to see you again soon!";
+         return "Finally! Bye. Don't let the door hit you on the way out.";
      }
 
      /**
@@ -59,6 +59,6 @@ public class Message {
       * @return The formatted error message.
       */
      public static String showError(String errorMessage) {
-         return "Error: " + errorMessage;
+         return errorMessage + "\nTry not to mess up next time.";
      }
  }

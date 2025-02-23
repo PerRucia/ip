@@ -43,15 +43,16 @@ public class UnmarkCommand implements Command {
     @Override
     public String execute(TaskList taskList, Message message) {
         if (taskIndex < 0 || taskIndex >= taskList.getSize()) {
-            return Message.showError("Invalid task index.");
+            return Message.showError("Invalid task index. It's just a number, come on.");
         }
         if (!taskList.isTaskDone(taskIndex)) {
-            return Message.showError("Task is already unmarked.");
+            return Message.showError("Task is already unmarked. Even a goldfish has a better memory.");
         }
         taskList.unmarkTask(taskIndex);
         try {
             TaskStorageUtil.saveTasks(taskList, storage);
             message.addMessage("Unmarked task as not done - " + taskList.getTask(taskIndex));
+            message.addMessage("You're back to square one.");
         } catch (IOException e) {
             return Message.showError(e.getMessage());
         }

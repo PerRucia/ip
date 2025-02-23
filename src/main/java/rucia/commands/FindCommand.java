@@ -50,7 +50,8 @@ public class FindCommand implements Command {
                 .collect(Collectors.toList());
 
         if (matchingTasks.isEmpty()) {
-            message.addMessage("No tasks found with the keywords: " + String.join(", ", keywords));
+            message.addMessage("No tasks found with the keywords: " + String.join(", ", keywords)
+                    + ". Better luck next time.");
         } else {
             message.addMessage("Tasks found with the keywords: " + String.join(", ", keywords));
             for (Task task : matchingTasks) {

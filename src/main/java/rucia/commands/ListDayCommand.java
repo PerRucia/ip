@@ -60,7 +60,7 @@ public class ListDayCommand implements Command {
                 .collect(Collectors.toList());
 
         if (tasksForDay.isEmpty()) {
-            message.addMessage("No tasks found for " + date);
+            message.addMessage("No tasks found for " + date + ". Enjoy your free time, I guess.");
         } else {
             message.addMessage("Tasks for " + date + ":");
             for (Task task : tasksForDay) {

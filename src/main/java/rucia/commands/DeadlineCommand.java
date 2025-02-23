@@ -58,12 +58,14 @@ public class DeadlineCommand implements Command {
             TaskStorageUtil.saveTasks(taskList, storage);
 
             message.addMessage("Added Deadline task - " + taskDescription + " (by: " +
-                    dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mma")) + ")\n" +
-                    "You now have " + taskList.getSize() + " entries in your list.");
+                    dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mma")) + ")");
+            message.addMessage("You now have " + taskList.getSize() + " entries in your list. " +
+                    "Impressive, I guess.");
             return message.getMessage();
 
         } catch (DateTimeParseException e) {
-            return Message.showError("Invalid date format. Use: dd/MM/yyyy HHmm (e.g., 02/03/2019 1800)");
+            return Message.showError("Invalid date format. Use: dd/MM/yyyy HHmm " +
+                    "(e.g., 02/03/2019 1800). It's not that hard.");
         } catch (IOException e) {
             return Message.showError(e.getMessage());
         }

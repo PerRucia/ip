@@ -43,15 +43,16 @@ public class MarkCommand implements Command {
     @Override
     public String execute(TaskList taskList, Message message) {
         if (taskIndex < 0 || taskIndex >= taskList.getSize()) {
-            return Message.showError("Invalid task index.");
+            return Message.showError("Invalid task index. It's not rocket science.");
         }
         if (taskList.isTaskDone(taskIndex)) {
-            return Message.showError("Task is already marked as done.");
+            return Message.showError("Task is already marked as done. Are you forgetful or what?");
         }
         taskList.markTask(taskIndex);
         try {
             TaskStorageUtil.saveTasks(taskList, storage);
             message.addMessage("Marked task as done - " + taskList.getTask(taskIndex));
+            message.addMessage("Finally, some progress.");
         } catch (IOException e) {
             return Message.showError(e.getMessage());
         }

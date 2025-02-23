@@ -18,7 +18,7 @@ public class HelpCommand implements Command {
      */
     @Override
     public String execute(TaskList taskList, Message message) {;
-        String helpMessage = "Here are the available commands:\n"
+        String helpMessage = "Looks like you need help after all huh?:\n"
                 + "1. bye - Exit the application\n"
                 + "2. add <task description> - Add a new task\n"
                 + "3. deadline <task> /by <date> - Add a new deadline task\n"

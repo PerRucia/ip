@@ -9,6 +9,8 @@ import javafx.stage.Stage;
 import rucia.driver.Rucia;
 
 public class Main extends Application {
+    private static final int DEFAULT_WIDTH = 600;
+    private static final int DEFAULT_HEIGHT = 600;
 
     private final Rucia rucia = new Rucia();
 
@@ -24,6 +26,8 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setRucia(rucia);  // inject the Rucia instance
             stage.setTitle("Rucia ChatBot");
+            stage.setWidth(DEFAULT_WIDTH);
+            stage.setHeight(DEFAULT_HEIGHT);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();  // Consider using a logging framework

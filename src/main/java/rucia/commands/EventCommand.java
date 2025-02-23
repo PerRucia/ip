@@ -70,7 +70,7 @@ public class EventCommand implements Command {
             message.addMessage("Added Event task - " + description + " (from: " +
                     fromDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mma")) + " to: " +
                     toDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mma")) + ")");
-            message.addMessage("You now have " + taskList.getSize() + " entries in your list.");
+            message.addMessage("You now have " + taskList.getSize() + " entries in your list. Impressive, I guess.");
             return message.getMessage();
         } catch (DateTimeParseException e) {
             return Message.showError("Invalid date format. Use: dd/MM/yyyy HHmm (e.g., 02/03/2019 1800)");

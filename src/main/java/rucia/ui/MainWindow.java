@@ -1,5 +1,6 @@
 package rucia.ui;
 
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 import rucia.driver.Rucia;
 
 /**
@@ -23,11 +25,12 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
-
     private Rucia rucia;
 
     private static final Image USER_IMAGE = new Image(MainWindow.class.getResourceAsStream("/images/user.png"));
-    private static final Image RUCIA_IMAGE = new Image(MainWindow.class.getResourceAsStream("/images/rucia.png"));
+    private static final Image RUCIA_IMAGE = new Image(MainWindow.class.getResourceAsStream("/images/rucia2.png"));
+    private static final int EXIT_DELAY = 1500; // Delay before exiting the application
+    private static final int RESPONSE_DELAY = 400; // Delay before Rucia responds
 
     @FXML
     public void initialize() {
@@ -65,15 +68,27 @@ public class MainWindow extends AnchorPane {
         assert input != null && !input.isEmpty() : "User input should not be null or empty";
         String response = rucia.getResponse(input);
 
-        // Ensure alignment is properly applied
+        // Create the user dialog box and add it immediately
         DialogBox userDialog = DialogBox.getUserDialog(input, USER_IMAGE);
-        DialogBox ruciaDialog = DialogBox.getRuciaDialog(response, RUCIA_IMAGE);
-
-        dialogContainer.getChildren().addAll(userDialog, ruciaDialog);
+        dialogContainer.getChildren().add(userDialog);
         userInput.clear();
 
+        // Create a PauseTransition before adding Rucia's response
+        PauseTransition botDelay = new PauseTransition(Duration.millis(RESPONSE_DELAY));
+        botDelay.setOnFinished(event -> {
+            Platform.runLater(() -> {
+                DialogBox ruciaDialog = DialogBox.getRuciaDialog(response, RUCIA_IMAGE);
+                dialogContainer.getChildren().add(ruciaDialog);
+            });
+        });
+
+        botDelay.play();
+
+        // Delay exit if user says "bye"
         if (input.equalsIgnoreCase("bye")) {
-            Platform.exit();
+            PauseTransition exitDelay = new PauseTransition(Duration.millis(EXIT_DELAY + RESPONSE_DELAY));
+            exitDelay.setOnFinished(event -> Platform.exit());
+            exitDelay.play();
         }
     }
 }

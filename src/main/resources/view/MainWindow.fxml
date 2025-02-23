@@ -40,6 +40,7 @@
                 prefWidth="76.0"
                 text="Send"
                 styleClass="send-button"
+                style="-fx-background-color: #0084FF; -fx-text-fill: white;"
                 AnchorPane.bottomAnchor="0.0"
                 AnchorPane.rightAnchor="0.0" />
     </children>

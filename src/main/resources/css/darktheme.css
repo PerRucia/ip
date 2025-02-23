@@ -1,8 +1,8 @@
 /* darktheme.css */
 .root {
     -fx-font-family: "Segoe UI", sans-serif;
-    -fx-background-color: #2b2b2b;
     -fx-text-fill: #e8e6e3;
+    -fx-background-color: linear-gradient(to bottom, #2E2E2E, #1C1C1C);
 }
 
 /* Style for labels */

@@ -24,3 +24,5 @@ The generated code was quite accurate and usually required only minor modificati
 - Tasks were relatively simple this week, with most of the work involving pull requests and merging them into the main branch.
 - However, a couple of bugs were missed when transitioning from a text-based interface to the JavaFX GUI.
 - GPT was able to quickly explain the issue, identify the problematic code, and suggest a fix.
+
+### Week 7 Tasks

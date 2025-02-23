@@ -11,6 +11,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
+import javafx.animation.FadeTransition;
+import javafx.util.Duration;
 
 /**
  * Represents a dialog box consisting of an ImageView to represent the speaker's face
@@ -51,15 +53,20 @@ public class DialogBox extends HBox {
         displayPicture.setClip(clip);
 
         // Give some spacing between avatar and text
-        this.setSpacing(10);
+        this.setSpacing(15);
 
         // Style the label like a bubble
         dialog.setStyle(
                 "-fx-background-color: #3C3F41; "
-                        + "-fx-text-fill: #FFFFFF; "
-                        + "-fx-background-radius: 10; "
-                        + "-fx-padding: 10;"
+                + "-fx-text-fill: #FFFFFF; "
+                + "-fx-background-radius: 10; "
+                + "-fx-padding: 10;"
+                + "-fx-font-family: 'Segoe UI'; "
+                + "-fx-font-size: 14px; "
         );
+
+        // Apply fade-in animation
+        applyFadeInAnimation();
     }
 
     /**
@@ -72,10 +79,11 @@ public class DialogBox extends HBox {
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
         db.dialog.setStyle(
-                "-fx-background-color: #0061a8; "
-                        + "-fx-text-fill: #FFFFFF; "
-                        + "-fx-background-radius: 10; "
-                        + "-fx-padding: 10;"
+            "-fx-background-color: #0061a8; "
+            + "-fx-text-fill: #FFFFFF; "
+            + "-fx-background-radius: 10; "
+            + "-fx-padding: 12 15 12 15; "
+            + "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 5, 0, 2, 2);"
         );
         db.setAlignment(Pos.TOP_RIGHT);
         return db;
@@ -94,11 +102,19 @@ public class DialogBox extends HBox {
         db.getChildren().remove(db.displayPicture);
         db.getChildren().add(0, db.displayPicture);
         db.dialog.setStyle(
-                "-fx-background-color: #3C3F41; "
-                        + "-fx-text-fill: #FFFFFF; "
-                        + "-fx-background-radius: 10; "
-                        + "-fx-padding: 10;"
+            "-fx-background-color: #3C3F41; "
+            + "-fx-text-fill: #FFFFFF; "
+            + "-fx-background-radius: 10; "
+            + "-fx-padding: 12 15 12 15; "
+            + "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 5, 0, 2, 2);"
         );
         return db;
+    }
+
+    private void applyFadeInAnimation() {
+        FadeTransition ft = new FadeTransition(Duration.millis(300), this);
+        ft.setFromValue(0);
+        ft.setToValue(1);
+        ft.play();
     }
 }

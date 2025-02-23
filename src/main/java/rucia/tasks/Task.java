@@ -20,34 +20,6 @@ public abstract class Task {
     }
 
     /**
-     * Parses a task from a file line based on the specified format.
-     * Supports ToDo, Deadline, and Event task types.
-     *
-     * @param line The line from the file representing a task.
-     * @return A Task object created from the parsed data.
-     * @throws IllegalArgumentException if the task type is unknown.
-     */
-    public static Task parse(String line) {
-        String[] parts = line.split(" \\| ");
-        String type = parts[0];
-        boolean isDone = parts[1].equals("1");
-        String description = parts[2];
-        for (String part : parts) {
-            System.out.println(part);
-        }
-        Task task = switch (type) {
-            case "T" -> new ToDo(description);
-            case "D" -> new Deadline(description, parts[3]);
-            case "E" -> new Event(description, parts[3], parts[4]);
-            default -> throw new IllegalArgumentException("Unknown task type: " + type);
-        };
-        if (isDone) {
-            task.markAsDone();
-        }
-        return task;
-    }
-
-    /**
      * Converts the Task to a formatted string suitable for file storage.
      *
      * @return A string representing the task in a file-friendly format.

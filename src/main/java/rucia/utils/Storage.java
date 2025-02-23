@@ -86,6 +86,9 @@ public class Storage {
                     long toTimestamp = Long.parseLong(parts[4]);
                     task = new Event(description, fromTimestamp, toTimestamp);
                     break;
+                case "N":
+                    task = new Note(description, parts[3]);
+                    break;
                 default:
                     throw new IllegalArgumentException("Unknown task type: " + type);
             }
@@ -93,7 +96,6 @@ public class Storage {
             if (isDone) {
                 task.markAsDone();
             }
-
             tasks.add(task);
         }
         return tasks;

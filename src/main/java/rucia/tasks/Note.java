@@ -54,7 +54,7 @@ public class Note extends Task {
      */
     @Override
     public String toFileString() {
-        return String.format("%s | %s | %s", getType(), title, description);
+        return String.format("%s | %s | %s | %s", getType(), isDone ? 1 : 0, title, description);
     }
 
     /**
@@ -64,6 +64,6 @@ public class Note extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s] %s: %s", getType(), title, description);
+        return String.format("%s", title);
     }
 }

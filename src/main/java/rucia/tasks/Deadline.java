@@ -64,7 +64,8 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         LocalDateTime byDateTime = LocalDateTime.ofEpochSecond(byTimestamp, 0, ZoneOffset.UTC);
-        return String.format("[%s][%s] %s (by: %s)", getType(), isDone ? "X" : " ", description, byDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mma")));
+        return String.format("[%s][%s] %s (by: %s)", getType(), isDone ? "X" : " ", description,
+                byDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mma")));
     }
 
     /**

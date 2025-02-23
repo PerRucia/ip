@@ -14,6 +14,7 @@
             fx:controller="rucia.ui.MainWindow">
     <children>
         <ScrollPane fx:id="scrollPane"
+                    fitToWidth="true"
                     AnchorPane.topAnchor="0.0"
                     AnchorPane.bottomAnchor="40.0"
                     AnchorPane.leftAnchor="0.0"

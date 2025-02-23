@@ -7,10 +7,9 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import rucia.driver.Rucia;
-
-import java.util.stream.Stream;
 
 /**
  * Controller for the main GUI.
@@ -33,6 +32,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        VBox.setVgrow(dialogContainer, Priority.ALWAYS); // Ensure dialog container stretches
+
+        // Ensure VBox expands when ScrollPane resizes
+        dialogContainer.prefWidthProperty().bind(scrollPane.widthProperty());
     }
 
     /**
@@ -61,10 +64,12 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         assert input != null && !input.isEmpty() : "User input should not be null or empty";
         String response = rucia.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, USER_IMAGE),
-                DialogBox.getRuciaDialog(response, RUCIA_IMAGE)
-        );
+
+        // Ensure alignment is properly applied
+        DialogBox userDialog = DialogBox.getUserDialog(input, USER_IMAGE);
+        DialogBox ruciaDialog = DialogBox.getRuciaDialog(response, RUCIA_IMAGE);
+
+        dialogContainer.getChildren().addAll(userDialog, ruciaDialog);
         userInput.clear();
 
         if (input.equalsIgnoreCase("bye")) {

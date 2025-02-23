@@ -1,10 +1,7 @@
 package rucia.ui;
 
 import java.io.IOException;
-import java.util.Collections;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -49,7 +46,6 @@ public class DialogBox extends HBox {
         displayPicture.setFitHeight(size);
         displayPicture.setPreserveRatio(true);
 
-
         // Clip the ImageView into a circle
         Circle clip = new Circle(25, 25, 20); // centerX, centerY, radius
         displayPicture.setClip(clip);
@@ -75,13 +71,13 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
-        // Maybe a different color for the user bubble
         db.dialog.setStyle(
                 "-fx-background-color: #0061a8; "
                         + "-fx-text-fill: #FFFFFF; "
                         + "-fx-background-radius: 10; "
                         + "-fx-padding: 10;"
         );
+        db.setAlignment(Pos.TOP_RIGHT);
         return db;
     }
 
@@ -94,17 +90,15 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getRuciaDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
-        db.flip();
+        db.setAlignment(Pos.TOP_LEFT);
+        db.getChildren().remove(db.displayPicture);
+        db.getChildren().add(0, db.displayPicture);
+        db.dialog.setStyle(
+                "-fx-background-color: #3C3F41; "
+                        + "-fx-text-fill: #FFFFFF; "
+                        + "-fx-background-radius: 10; "
+                        + "-fx-padding: 10;"
+        );
         return db;
-    }
-
-    /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
-     */
-    private void flip() {
-        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-        Collections.reverse(tmp);
-        getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT);
     }
 }

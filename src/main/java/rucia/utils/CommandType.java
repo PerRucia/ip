@@ -19,5 +19,6 @@ public enum CommandType {
     NOTE,
     NOTES,
     DELETE_NOTE,
+    VIEW_NOTE,
     UNKNOWN
 }

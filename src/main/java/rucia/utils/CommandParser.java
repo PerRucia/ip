@@ -13,6 +13,7 @@ public class CommandParser {
     private static final int EVENT_COMMAND_LENGTH = 5;
     private static final int FIND_COMMAND_LENGTH = 4;
     private static final int NOTE_COMMAND_LENGTH = 4;
+    private static final int VIEW_NOTE_COMMAND_LENGTH = 9;
 
     /**
      * Parses the user input and returns the corresponding command object.
@@ -90,6 +91,13 @@ public class CommandParser {
                 return new HelpNotesCommand();
             case DELETE_NOTE:
                 return new DeleteNoteCommand(input, storage);
+            case VIEW_NOTE:
+                String noteIndex = input.substring(VIEW_NOTE_COMMAND_LENGTH).trim();
+                if (noteIndex.isEmpty()) {
+                    throw new IllegalArgumentException("Note index cannot be empty. Use: view_note <index>. " +
+                            "It's not that hard.");
+                }
+                return new ViewNoteCommand(noteIndex);
             default:
                 throw new IllegalArgumentException("Unknown command type. Are you even trying?");
         }

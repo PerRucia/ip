@@ -16,7 +16,6 @@ public class HelpNotesCommand implements Command {
      * @param taskList The current task list (not used in this command).
      * @param message The message object to display messages on JavaFX.
      */
-    @Override
     public String execute(TaskList taskList, Message message) {;
         String helpMessage = "It's just note-taking, how hard can it be?:\n"
                 + "1. note <title> /desc <description> - Add a new note\n"

@@ -66,4 +66,13 @@ public class Note extends Task {
     public String toString() {
         return String.format("%s", title);
     }
+
+    /**
+     * Returns a string representation of the Note for view_note command.
+     *
+     * @return A string with the note type, title, and description.
+     */
+    public String toFullString() {
+        return String.format("%s\n%s", title, description);
+    }
 }

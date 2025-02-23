@@ -54,6 +54,8 @@ public class CommandIdentifier {
             } else {
                 return CommandType.NOTE;
             }
+        } else if (input.startsWith("view_note")) {
+            return CommandType.VIEW_NOTE;
         } else {
             return CommandType.UNKNOWN;
         }

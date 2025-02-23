@@ -192,6 +192,16 @@ class CommandTest {
     }
 
     @Test
+    void execute_viewNoteCommand_viewNote() {
+        new NoteCommand("Meeting Notes", "Discussed project plan", storage).execute(taskList, message);
+        ViewNoteCommand command = new ViewNoteCommand("1");
+
+        String response = command.execute(taskList, message);
+
+        assertTrue(response.contains("Meeting Notes"));
+    }
+
+    @Test
     void execute_cheerCommand_displaysMotivationalQuote() {
         CheerCommand command = new CheerCommand();
         String response = command.execute(taskList, message);

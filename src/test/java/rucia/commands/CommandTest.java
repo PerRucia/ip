@@ -129,8 +129,17 @@ class CommandTest {
 
         String response = command.execute(taskList, message);
 
-        assertEquals(1, taskList.getTaskSize());
+        assertEquals(1, taskList.getNoteSize());
         assertTrue(response.contains("Meeting Notes"));
+    }
+
+    @Test
+    void execute_notesCommand_listsAllNotes() {
+        new NoteCommand("Meeting Notes", "Discussed project plan", storage).execute(taskList, message);
+        ListNotesCommand command = new ListNotesCommand();
+        String response = command.execute(taskList, message);
+
+        assertTrue(response.contains("Here are your notes:"));
     }
 
     @Test
@@ -160,6 +169,14 @@ class CommandTest {
         String response = command.execute(taskList, message);
 
         assertTrue(response.contains("Looks like you need help after all huh?"));
+    }
+
+    @Test
+    void execute_helpNotesCommand_displaysNotesHelpMessage() {
+        HelpNotesCommand command = new HelpNotesCommand();
+        String response = command.execute(taskList, message);
+
+        assertTrue(response.contains("It's just note-taking, how hard can it be?:"));
     }
 
     @Test

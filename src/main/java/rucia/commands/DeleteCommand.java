@@ -39,7 +39,7 @@ public class DeleteCommand implements Command {
             storage.saveToFile(taskList.getTasks());
 
             message.addMessage("Deleted task - " + taskDescription + ". Cleaning up your mess, I see.");
-            message.addMessage("You now have " + taskList.getSize() + " entries in your list.");
+            message.addMessage("You now have " + taskList.getTaskSize() + " entries in your list.");
             return message.getMessage();
 
         } catch (IndexOutOfBoundsException | NumberFormatException e) {

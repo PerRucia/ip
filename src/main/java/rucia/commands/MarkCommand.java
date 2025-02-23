@@ -42,7 +42,7 @@ public class MarkCommand implements Command {
      */
     @Override
     public String execute(TaskList taskList, Message message) {
-        if (taskIndex < 0 || taskIndex >= taskList.getSize()) {
+        if (taskIndex < 0 || taskIndex >= taskList.getTaskSize()) {
             return Message.showError("Invalid task index. It's not rocket science.");
         }
         if (taskList.isTaskDone(taskIndex)) {
@@ -50,7 +50,7 @@ public class MarkCommand implements Command {
         }
         taskList.markTask(taskIndex);
         try {
-            TaskStorageUtil.saveTasks(taskList, storage);
+            TaskStorageUtil.saveEntries(taskList, storage);
             message.addMessage("Marked task as done - " + taskList.getTask(taskIndex));
             message.addMessage("Finally, some progress.");
         } catch (IOException e) {

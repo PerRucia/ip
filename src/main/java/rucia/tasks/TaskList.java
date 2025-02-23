@@ -8,22 +8,32 @@ import java.util.ArrayList;
  */
 public class TaskList {
     private ArrayList<Task> tasks;
+    private ArrayList<Note> notes;
 
     /**
      * Constructs an empty TaskList.
      */
     public TaskList() {
         this.tasks = new ArrayList<>();
+        this.notes = new ArrayList<>();
     }
 
     /**
-     * Constructs a TaskList with an existing list of tasks and notes.
+     * Constructs a TaskList with an existing list of tasks and notes from a Storage instance.
      *
-     * @param tasks The list of tasks to initialize the TaskList with.
+     * @param list The list of tasks and notes to initialize the TaskList with.
      *
      */
-    public TaskList(ArrayList<Task> tasks) {
-        this.tasks = tasks;
+    public TaskList(ArrayList<Task> list) {
+        this.tasks = new ArrayList<>();
+        this.notes = new ArrayList<>();
+        for (Task task : list) {
+            if (task instanceof Note) {
+                notes.add((Note) task);
+            } else {
+                tasks.add(task);
+            }
+        }
     }
 
     // Task-related methods
@@ -68,7 +78,7 @@ public class TaskList {
      * Returns the number of tasks in the task list.
      * @return The number of tasks in the task list.
      */
-    public int getSize() {
+    public int getTaskSize() {
         return tasks.size();
     }
 
@@ -124,5 +134,59 @@ public class TaskList {
         } else {
             throw new IndexOutOfBoundsException("Invalid task index");
         }
+    }
+
+    // Note-related methods
+
+    /**
+     * Adds a note to the note list.
+     * @param note The note to add.
+     */
+    public void addNote(Note note) {
+        notes.add(note);
+    }
+
+    /**
+     * Deletes the note at the specified index.
+     * @param index The index of the note to delete.
+     * @return The note that was deleted.
+     * @throws IndexOutOfBoundsException if the index is out of bounds.
+     */
+    public Note deleteNote(int index) {
+        if (index >= 0 && index < notes.size()) {
+            return notes.remove(index);
+        } else {
+            throw new IndexOutOfBoundsException("Invalid note index");
+        }
+    }
+
+    /**
+     * Returns the note at the specified index.
+     * @param index The index of the note to return.
+     * @return The note at the specified index.
+     * @throws IndexOutOfBoundsException if the index is out of bounds.
+     */
+    public Note getNote(int index) {
+        if (index >= 0 && index < notes.size()) {
+            return notes.get(index);
+        } else {
+            throw new IndexOutOfBoundsException("Invalid note index");
+        }
+    }
+
+    /**
+     * Returns the number of notes in the note list.
+     * @return The number of notes in the note list.
+     */
+    public int getNoteSize() {
+        return notes.size();
+    }
+
+    /**
+     * Returns the list of notes.
+     * @return The list of notes.
+     */
+    public ArrayList<Note> getNotes() {
+        return notes;
     }
 }

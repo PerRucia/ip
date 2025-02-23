@@ -65,12 +65,12 @@ public class EventCommand implements Command {
 
             taskList.addTask(new Event(description, fromDateTime.toEpochSecond(ZoneOffset.UTC),
                     toDateTime.toEpochSecond(ZoneOffset.UTC)));
-            TaskStorageUtil.saveTasks(taskList, storage);
+            TaskStorageUtil.saveEntries(taskList, storage);
 
             message.addMessage("Added Event task - " + description + " (from: " +
                     fromDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mma")) + " to: " +
                     toDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mma")) + ")");
-            message.addMessage("You now have " + taskList.getSize() + " entries in your list. Impressive, I guess.");
+            message.addMessage("You now have " + taskList.getTaskSize() + " entries in your list. Impressive, I guess.");
             return message.getMessage();
         } catch (DateTimeParseException e) {
             return Message.showError("Invalid date format. Use: dd/MM/yyyy HHmm (e.g., 02/03/2019 1800)");

@@ -2,14 +2,11 @@ package rucia.commands;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import rucia.tasks.TaskList;
 import rucia.ui.Message;
 import rucia.utils.Storage;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -31,7 +28,7 @@ class CommandTest {
         AddCommand command = new AddCommand("Buy groceries", storage);
         String response = command.execute(taskList, message);
 
-        assertEquals(1, taskList.getSize());
+        assertEquals(1, taskList.getTaskSize());
         assertTrue(response.contains("Added ToDo task - Buy groceries"));
         verify(storage, times(1)).saveToFile(taskList.getTasks());
     }
@@ -43,7 +40,7 @@ class CommandTest {
 
         String response = command.execute(taskList, message);
 
-        assertEquals(0, taskList.getSize());
+        assertEquals(0, taskList.getTaskSize());
         assertTrue(response.contains("Deleted task"));
         verify(storage, times(2)).saveToFile(taskList.getTasks());
     }
@@ -79,7 +76,7 @@ class CommandTest {
 
         String response = command.execute(taskList, message);
 
-        assertEquals(1, taskList.getSize());
+        assertEquals(1, taskList.getTaskSize());
         assertTrue(response.contains("Added Deadline task - Finish report"));
         verify(storage, times(1)).saveToFile(taskList.getTasks());
     }
@@ -90,7 +87,7 @@ class CommandTest {
 
         String response = command.execute(taskList, message);
 
-        assertEquals(1, taskList.getSize());
+        assertEquals(1, taskList.getTaskSize());
         assertTrue(response.contains("Added Event task - Team Meeting"));
         verify(storage, times(1)).saveToFile(taskList.getTasks());
     }
@@ -132,7 +129,7 @@ class CommandTest {
 
         String response = command.execute(taskList, message);
 
-        assertEquals(1, taskList.getSize());
+        assertEquals(1, taskList.getTaskSize());
         assertTrue(response.contains("Meeting Notes"));
     }
 
@@ -144,7 +141,7 @@ class CommandTest {
 
         String response = command.execute(taskList, message);
 
-        assertEquals(0, taskList.getSize());
+        assertEquals(0, taskList.getTaskSize());
         assertTrue(response.contains("Cleared all tasks."));
         verify(storage, times(3)).saveToFile(taskList.getTasks());
     }

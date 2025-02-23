@@ -79,9 +79,9 @@ public class CommandParser {
             case "cheer":
                 return new CheerCommand();
             case "note":
-                String[] noteParts = input.substring(NOTE_COMMAND_LENGTH).trim().split(" \\| ");
+                String[] noteParts = input.substring(NOTE_COMMAND_LENGTH).trim().split(" /desc ");
                 if (noteParts.length < 2) {
-                    throw new IllegalArgumentException("Invalid input format. Use: note <Title> | " +
+                    throw new IllegalArgumentException("Invalid input format. Use: note <Title> /desc " +
                             "<Description>. Try to keep up.");
                 }
                 return new NoteCommand(noteParts[0].trim(), noteParts[1].trim(), storage);

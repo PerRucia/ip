@@ -35,10 +35,10 @@ public class NoteCommand implements Command {
     @Override
     public String execute(TaskList taskList, Message message) {
         Note note = new Note(title, description);
-        taskList.addTask(note);
+        taskList.addNote(note);
         message.addMessage("Added Note - " + title);
-        message.addMessage("You now have " + taskList.getSize() + " entries in your list." +
-                " Impressive, I guess.");
+        message.addMessage("You now have " + taskList.getNoteSize() + " note(s)." +
+                " Are you sure that's enough?");
         return message.getMessage();
     }
 }

@@ -55,11 +55,11 @@ public class DeadlineCommand implements Command {
             }
             LocalDateTime dateTime = LocalDateTime.parse(dateTimeString.trim(), DATE_TIME_FORMATTER);
             taskList.addTask(new Deadline(taskDescription, dateTime.toEpochSecond(ZoneOffset.UTC)));
-            TaskStorageUtil.saveTasks(taskList, storage);
+            TaskStorageUtil.saveEntries(taskList, storage);
 
             message.addMessage("Added Deadline task - " + taskDescription + " (by: " +
                     dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mma")) + ")");
-            message.addMessage("You now have " + taskList.getSize() + " entries in your list. " +
+            message.addMessage("You now have " + taskList.getTaskSize() + " entries in your list. " +
                     "Impressive, I guess.");
             return message.getMessage();
 

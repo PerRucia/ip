@@ -18,11 +18,11 @@ public class ListCommand implements Command {
      */
     @Override
     public String execute(TaskList taskList, Message message) {
-        if (taskList.getSize() == 0) {
+        if (taskList.getTaskSize() == 0) {
             message.addMessage("Your task list is empty. Someone is free...");
         } else {
             message.addMessage("Here are your tasks. Try not to forget them:");
-            for (int i = 0; i < taskList.getSize(); i++) {
+            for (int i = 0; i < taskList.getTaskSize(); i++) {
                 message.addMessage((i + 1) + ". " + taskList.getTask(i));
             }
         }

@@ -42,7 +42,7 @@ public class UnmarkCommand implements Command {
      */
     @Override
     public String execute(TaskList taskList, Message message) {
-        if (taskIndex < 0 || taskIndex >= taskList.getSize()) {
+        if (taskIndex < 0 || taskIndex >= taskList.getTaskSize()) {
             return Message.showError("Invalid task index. It's just a number, come on.");
         }
         if (!taskList.isTaskDone(taskIndex)) {
@@ -50,7 +50,7 @@ public class UnmarkCommand implements Command {
         }
         taskList.unmarkTask(taskIndex);
         try {
-            TaskStorageUtil.saveTasks(taskList, storage);
+            TaskStorageUtil.saveEntries(taskList, storage);
             message.addMessage("Unmarked task as not done - " + taskList.getTask(taskIndex));
             message.addMessage("You're back to square one.");
         } catch (IOException e) {

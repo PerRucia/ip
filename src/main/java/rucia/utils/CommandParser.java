@@ -23,25 +23,25 @@ public class CommandParser {
      * @return The command object corresponding to the input.
      * @throws IllegalArgumentException if the input format is invalid or the command type is unknown.
      */
-    public static Command parse(String input, String commandType, Storage storage) {
+    public static Command parse(String input, CommandType commandType, Storage storage) {
         switch (commandType) {
-            case "bye":
+            case BYE:
                 return new ByeCommand();
-            case "add":
+            case ADD:
                 String taskDescription = input.substring(ADD_COMMAND_LENGTH).trim();
                 if (taskDescription.isEmpty()) {
                     throw new IllegalArgumentException("Task description cannot be empty. Use: add <task " +
                             "description>. It's not rocket science.");
                 }
                 return new AddCommand(taskDescription, storage);
-            case "deadline":
+            case DEADLINE:
                 String[] parts = input.substring(DEADLINE_COMMAND_LENGTH).trim().split(" /by ");
                 if (parts.length < 2) {
                     throw new IllegalArgumentException("Invalid input format. Use: deadline <task> /by <date>. " +
                             "Seriously, how hard is it?");
                 }
                 return new DeadlineCommand(parts[0].trim(), parts[1].trim(), storage);
-            case "event":
+            case EVENT:
                 String[] eventParts = input.substring(EVENT_COMMAND_LENGTH).trim().split(" /from ");
                 if (eventParts.length < 2) {
                     throw new IllegalArgumentException("Invalid input format. Use: event <task> /from <start> /to " +
@@ -54,37 +54,40 @@ public class CommandParser {
                             "<end>. It's not that complicated.");
                 }
                 return new EventCommand(description, timeParts[0].trim(), timeParts[1].trim(), storage);
-            case "list":
+            case LIST:
                 return new ListCommand();
-            case "mark":
+            case MARK:
                 return new MarkCommand(input, storage);
-            case "unmark":
+            case UNMARK:
                 return new UnmarkCommand(input, storage);
-            case "delete":
+            case DELETE:
                 return new DeleteCommand(input, storage);
-            case "list_day":
+            case LIST_DAY:
                 return new ListDayCommand(input);
-            case "help":
-            case "?":
+            case HELP:
                 return new HelpCommand();
-            case "clear":
+            case CLEAR:
                 return new ClearCommand(storage);
-            case "find":
+            case FIND:
                 String[] keywords = input.substring(FIND_COMMAND_LENGTH).trim().split("\\s+");
                 if (keywords.length == 0) {
                     throw new IllegalArgumentException("Keyword(s) cannot be empty. Use: find <keyword1> <keyword2> " +
                             "... Come on, it's not that hard.");
                 }
                 return new FindCommand(keywords);
-            case "cheer":
+            case CHEER:
                 return new CheerCommand();
-            case "note":
+            case NOTE:
                 String[] noteParts = input.substring(NOTE_COMMAND_LENGTH).trim().split(" /desc ");
                 if (noteParts.length < 2) {
                     throw new IllegalArgumentException("Invalid input format. Use: note <Title> /desc " +
                             "<Description>. Try to keep up.");
                 }
                 return new NoteCommand(noteParts[0].trim(), noteParts[1].trim(), storage);
+            case NOTES:
+                return new ListNotesCommand();
+            case HELP_NOTES:
+                return new HelpNotesCommand();
             default:
                 throw new IllegalArgumentException("Unknown command type. Are you even trying?");
         }

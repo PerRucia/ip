@@ -15,37 +15,43 @@ public class CommandIdentifier {
      *         such as "add", "deadline", "event", "list", "mark",
      *         "unmark", "delete", "list_day", or "unknown" if no match is found.
      */
-    public static String identify(String input) {
+    public static CommandType identify(String input) {
         if (input.equalsIgnoreCase("bye")) {
-            return "bye";
+            return CommandType.BYE;
+        } else if (input.trim().equalsIgnoreCase("help notes")) {
+            return CommandType.HELP_NOTES;
         } else if (input.trim().equalsIgnoreCase("help") || input.trim().equals("?")) {
-            return "help";
+            return CommandType.HELP;
         } else if (input.trim().equalsIgnoreCase("clear")) {
-            return "clear";
+            return CommandType.CLEAR;
         } else if (input.startsWith("add")) {
-            return "add";
+            return CommandType.ADD;
         } else if (input.startsWith("deadline")) {
-            return "deadline";
+            return CommandType.DEADLINE;
         } else if (input.startsWith("event")) {
-            return "event";
+            return CommandType.EVENT;
         } else if (input.trim().equalsIgnoreCase("list")) {
-            return "list";
+            return CommandType.LIST;
         } else if (input.startsWith("mark")) {
-            return "mark";
+            return CommandType.MARK;
         } else if (input.startsWith("unmark")) {
-            return "unmark";
+            return CommandType.UNMARK;
         } else if (input.startsWith("delete")) {
-            return "delete";
+            return CommandType.DELETE;
         } else if (input.startsWith("list_day")) {
-            return "list_day";
+            return CommandType.LIST_DAY;
         } else if (input.startsWith("find")) {
-            return "find";
+            return CommandType.FIND;
         } else if (input.trim().equalsIgnoreCase("cheer")) {
-            return "cheer";
+            return CommandType.CHEER;
         } else if (input.startsWith("note")) {
-            return "note";
+            if (input.trim().equalsIgnoreCase("notes")) {
+                return CommandType.NOTES;
+            } else {
+                return CommandType.NOTE;
+            }
         } else {
-            return "unknown";
+            return CommandType.UNKNOWN;
         }
     }
 }

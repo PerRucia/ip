@@ -36,12 +36,12 @@ public class AddCommand implements Command {
         taskList.addTask(new ToDo(taskDescription));
         try {
             storage.saveToFile(taskList.getTasks());
+            message.addMessage("Added ToDo task - " + taskDescription);
+            message.addMessage("You now have " + taskList.getTaskSize() + " task(s) in your list. " +
+                    "Impressive, I guess.");
         } catch (IOException e) {
             return Message.showError(e.getMessage());
         }
-        message.addMessage("Added ToDo task - " + taskDescription);
-        message.addMessage("You now have " + taskList.getTaskSize() + " entries in your list. Impressive, I guess.");
-
         return message.getMessage();
     }
 }

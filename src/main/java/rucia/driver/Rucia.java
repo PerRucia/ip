@@ -2,6 +2,7 @@ package rucia.driver;
 
 import rucia.utils.CommandIdentifier;
 import rucia.utils.CommandParser;
+import rucia.utils.CommandType;
 import rucia.utils.Storage;
 import rucia.tasks.TaskList;
 import rucia.ui.Message;
@@ -43,7 +44,7 @@ public class Rucia {
      * @return A response message generated after processing the command.
      */
     public String getResponse(String input) {
-        String commandType = CommandIdentifier.identify(input);
+        CommandType commandType = CommandIdentifier.identify(input);
         try {
             Command command = CommandParser.parse(input, commandType, storage);
             return command.execute(taskList, new Message());

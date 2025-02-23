@@ -1,9 +1,13 @@
 package rucia.commands;
 
 import rucia.tasks.Note;
+import rucia.tasks.Task;
 import rucia.tasks.TaskList;
 import rucia.ui.Message;
 import rucia.utils.Storage;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a command to add a new Note to the task list.
@@ -36,9 +40,15 @@ public class NoteCommand implements Command {
     public String execute(TaskList taskList, Message message) {
         Note note = new Note(title, description);
         taskList.addNote(note);
-        message.addMessage("Added Note - " + title);
-        message.addMessage("You now have " + taskList.getNoteSize() + " note(s)." +
-                " Are you sure that's enough?");
+        try {
+            List<Task> notesAsTasks = new ArrayList<>(taskList.getNotes());
+            storage.saveToFile(notesAsTasks);
+            message.addMessage("Added Note - " + title);
+            message.addMessage("You now have " + taskList.getNoteSize() + " note(s)." +
+                    " Are you sure that's enough?");
+        } catch (Exception e) {
+            return Message.showError(e.getMessage());
+        }
         return message.getMessage();
     }
 }

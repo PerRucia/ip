@@ -59,6 +59,6 @@ public class Message {
       * @return The formatted error message.
       */
      public static String showError(String errorMessage) {
-         return errorMessage + "\nTry not to mess up next time.";
+         return errorMessage;
      }
  }

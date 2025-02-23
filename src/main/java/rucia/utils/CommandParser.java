@@ -88,6 +88,8 @@ public class CommandParser {
                 return new ListNotesCommand();
             case HELP_NOTES:
                 return new HelpNotesCommand();
+            case DELETE_NOTE:
+                return new DeleteNoteCommand(input, storage);
             default:
                 throw new IllegalArgumentException("Unknown command type. Are you even trying?");
         }

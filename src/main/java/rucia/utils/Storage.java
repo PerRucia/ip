@@ -46,13 +46,18 @@ public class Storage {
     /**
      * Saves the list of tasks to the storage file.
      *
-     * @param tasks The list of tasks to save.
+     * @param taskList The TaskList containing notes and tasks to be saved.
      * @throws IOException If an I/O error occurs while writing to the file.
      */
-    public void saveToFile(List<Task> tasks) throws IOException {
+    public void saveToFile(TaskList taskList) throws IOException {
         List<String> lines = new ArrayList<>();
+        ArrayList<Task> tasks = taskList.getTasks();
+        ArrayList<Note> notes = taskList.getNotes();
         for (Task task : tasks) {
             lines.add(task.toFileString());
+        }
+        for (Note note : notes) {
+            lines.add(note.toFileString());
         }
         Files.write(Paths.get(filePath), lines);
     }

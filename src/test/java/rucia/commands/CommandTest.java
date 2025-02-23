@@ -30,7 +30,7 @@ class CommandTest {
 
         assertEquals(1, taskList.getTaskSize());
         assertTrue(response.contains("Added ToDo task - Buy groceries"));
-        verify(storage, times(1)).saveToFile(taskList.getTasks());
+        verify(storage, times(1)).saveToFile(taskList);
     }
 
     @Test
@@ -42,7 +42,7 @@ class CommandTest {
 
         assertEquals(0, taskList.getTaskSize());
         assertTrue(response.contains("Deleted task"));
-        verify(storage, times(2)).saveToFile(taskList.getTasks());
+        verify(storage, times(2)).saveToFile(taskList);
     }
 
     @Test
@@ -54,7 +54,7 @@ class CommandTest {
 
         assertTrue(taskList.isTaskDone(0));
         assertTrue(response.contains("Marked task as done"));
-        verify(storage, times(2)).saveToFile(taskList.getTasks());
+        verify(storage, times(2)).saveToFile(taskList);
     }
 
     @Test
@@ -67,7 +67,7 @@ class CommandTest {
 
         assertFalse(taskList.isTaskDone(0));
         assertTrue(response.contains("Unmarked task as not done"));
-        verify(storage, times(3)).saveToFile(taskList.getTasks());
+        verify(storage, times(3)).saveToFile(taskList);
     }
 
     @Test
@@ -78,7 +78,7 @@ class CommandTest {
 
         assertEquals(1, taskList.getTaskSize());
         assertTrue(response.contains("Added Deadline task - Finish report"));
-        verify(storage, times(1)).saveToFile(taskList.getTasks());
+        verify(storage, times(1)).saveToFile(taskList);
     }
 
     @Test
@@ -89,7 +89,7 @@ class CommandTest {
 
         assertEquals(1, taskList.getTaskSize());
         assertTrue(response.contains("Added Event task - Team Meeting"));
-        verify(storage, times(1)).saveToFile(taskList.getTasks());
+        verify(storage, times(1)).saveToFile(taskList);
     }
 
     @Test
@@ -152,7 +152,7 @@ class CommandTest {
 
         assertEquals(0, taskList.getTaskSize());
         assertTrue(response.contains("Cleared all tasks."));
-        verify(storage, times(3)).saveToFile(taskList.getTasks());
+        verify(storage, times(3)).saveToFile(taskList);
     }
 
     @Test
@@ -177,6 +177,18 @@ class CommandTest {
         String response = command.execute(taskList, message);
 
         assertTrue(response.contains("It's just note-taking, how hard can it be?:"));
+    }
+
+    @Test
+    void execute_deleteNoteCommand_deletesNote() throws IOException {
+        new NoteCommand("Meeting Notes", "Discussed project plan", storage).execute(taskList, message);
+        DeleteNoteCommand command = new DeleteNoteCommand("delete_note 1", storage);
+
+        String response = command.execute(taskList, message);
+
+        assertEquals(0, taskList.getNoteSize());
+        assertTrue(response.contains("Deleted note"));
+        verify(storage, times(2)).saveToFile(taskList);
     }
 
     @Test

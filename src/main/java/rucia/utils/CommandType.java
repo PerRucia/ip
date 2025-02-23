@@ -18,5 +18,6 @@ public enum CommandType {
     CHEER,
     NOTE,
     NOTES,
+    DELETE_NOTE,
     UNKNOWN
 }

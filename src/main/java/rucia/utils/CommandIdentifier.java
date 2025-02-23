@@ -37,7 +37,11 @@ public class CommandIdentifier {
         } else if (input.startsWith("unmark")) {
             return CommandType.UNMARK;
         } else if (input.startsWith("delete")) {
-            return CommandType.DELETE;
+            if (input.trim().startsWith("delete_note")) {
+                return CommandType.DELETE_NOTE;
+            } else {
+                return CommandType.DELETE;
+            }
         } else if (input.startsWith("list_day")) {
             return CommandType.LIST_DAY;
         } else if (input.startsWith("find")) {

@@ -17,8 +17,6 @@ public class TaskStorageUtil {
      * @throws IOException if an I/O error occurs during saving.
      */
     public static void saveEntries(TaskList taskList, Storage storage) throws IOException {
-        storage.saveToFile(taskList.getTasks());
-        List<Task> notesAsTasks = new ArrayList<>(taskList.getNotes());
-        storage.saveToFile(notesAsTasks);
+        storage.saveToFile(taskList);
     }
 }

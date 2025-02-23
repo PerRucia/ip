@@ -35,7 +35,7 @@ public class AddCommand implements Command {
     public String execute(TaskList taskList, Message message) {
         taskList.addTask(new ToDo(taskDescription));
         try {
-            storage.saveToFile(taskList.getTasks());
+            storage.saveToFile(taskList);
             message.addMessage("Added ToDo task - " + taskDescription);
             message.addMessage("You now have " + taskList.getTaskSize() + " task(s) in your list. " +
                     "Impressive, I guess.");

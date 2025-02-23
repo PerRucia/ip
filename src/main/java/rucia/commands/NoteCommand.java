@@ -41,8 +41,7 @@ public class NoteCommand implements Command {
         Note note = new Note(title, description);
         taskList.addNote(note);
         try {
-            List<Task> notesAsTasks = new ArrayList<>(taskList.getNotes());
-            storage.saveToFile(notesAsTasks);
+            storage.saveToFile(taskList);
             message.addMessage("Added Note - " + title);
             message.addMessage("You now have " + taskList.getNoteSize() + " note(s)." +
                     " Are you sure that's enough?");

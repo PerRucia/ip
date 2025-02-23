@@ -1,14 +1,17 @@
 package rucia.commands;
 
+import rucia.tasks.Task;
 import rucia.tasks.TaskList;
 import rucia.ui.Message;
 import rucia.utils.Storage;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a command to delete a task from the task list.
  */
-public class DeleteCommand implements Command {
+public class DeleteNoteCommand implements Command {
     private String input;
     private Storage storage;
 
@@ -18,7 +21,7 @@ public class DeleteCommand implements Command {
      * @param input The input string containing the task number to be deleted.
      * @param storage The storage to save the updated task list.
      */
-    public DeleteCommand(String input, Storage storage) {
+    public DeleteNoteCommand(String input, Storage storage) {
         this.input = input;
         this.storage = storage;
     }
@@ -34,16 +37,16 @@ public class DeleteCommand implements Command {
     public String execute(TaskList taskList, Message message) {
         try {
             int taskIndex = Integer.parseInt(input.split(" ")[1]) - 1;
-            String taskDescription = taskList.getTask(taskIndex).getDescription();
-            taskList.deleteTask(taskIndex);
+            String noteTitle = taskList.getNote(taskIndex).toString();
+            taskList.deleteNote(taskIndex);
             storage.saveToFile(taskList);
 
-            message.addMessage("Deleted task - " + taskDescription + ". Cleaning up your mess, I see.");
-            message.addMessage("You now have " + taskList.getTaskSize() + " task(s) in your list.");
+            message.addMessage("Deleted note - " + noteTitle + ". Don't regret it.");
+            message.addMessage("You now have " + taskList.getNoteSize() + " note(s)");
             return message.getMessage();
 
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
-            return Message.showError("Invalid task number. Pay attention!");
+            return Message.showError("Invalid note number. Pay attention!");
         } catch (IOException e) {
             return Message.showError(e.getMessage());
         }

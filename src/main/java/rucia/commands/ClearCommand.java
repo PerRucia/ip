@@ -32,7 +32,7 @@ public class ClearCommand implements Command {
     public String execute(TaskList taskList, Message message) {
         taskList.clearTasks();
         try {
-            storage.saveToFile(taskList.getTasks());
+            storage.saveToFile(taskList);
             message.addMessage("Cleared all tasks. Starting fresh, are we?");
         } catch (IOException e) {
             return Message.showError(e.getMessage());

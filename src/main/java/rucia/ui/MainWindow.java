@@ -6,10 +6,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import rucia.driver.Rucia;
 
@@ -64,6 +66,9 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
+        // Trigger visual click effect on sendButton
+        animateSendButton();
+
         String input = userInput.getText();
         assert input != null && !input.isEmpty() : "User input should not be null or empty";
         String response = rucia.getResponse(input);
@@ -90,5 +95,23 @@ public class MainWindow extends AnchorPane {
             exitDelay.setOnFinished(event -> Platform.exit());
             exitDelay.play();
         }
+    }
+
+    /**
+     * Creates a visual effect when the send button is pressed.
+     */
+    private void animateSendButton() {
+        sendButton.setStyle("-fx-background-color: #005BB5; -fx-text-fill: white;");
+        DropShadow shadow = new DropShadow();
+        shadow.setColor(Color.LIGHTBLUE);
+        shadow.setRadius(15);
+        sendButton.setEffect(shadow);
+
+        PauseTransition resetEffect = new PauseTransition(Duration.millis(150));
+        resetEffect.setOnFinished(event -> {
+            sendButton.setStyle("-fx-background-color: #0084FF; -fx-text-fill: white;");
+            sendButton.setEffect(null);
+        });
+        resetEffect.play();
     }
 }

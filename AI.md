@@ -3,10 +3,8 @@
 - Provided instructions with reference to the weekly tasks and asked GPT to generate starter code based on it
 - Refined generated code by providing additional prompts to specify the requirements of the tasks.
 - Used Copilot to autocomplete some manual coding sections.
-
-**Reflection**<br>
-The tasks for Week 3 are relatively simple, so GPT was able to generate the code with minimal guidance. 
-The generated code was quite accurate and usually required only minor modifications. 
+- The tasks for Week 3 are relatively simple, so GPT was able to generate the code with minimal guidance. 
+- The generated code was quite accurate and usually required only minor modifications. 
 
 ### Week 4 Tasks
 - As more functions were added to the ChatBot, the amount of work required per task generally increased as code will need to be changed across multiple classes.
@@ -26,3 +24,5 @@ The generated code was quite accurate and usually required only minor modificati
 - GPT was able to quickly explain the issue, identify the problematic code, and suggest a fix.
 
 ### Week 7 Tasks
+- Most of the tasks for this week have already been completed in previous weeks (More error handling, More unit testing, Ai-Assisted)
+- The only things left to complete for this week are to give the chatbot some personality, and to create the Ui.png and user guide for it, both of which did not require AI assistance.

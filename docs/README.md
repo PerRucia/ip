@@ -1,23 +1,22 @@
-# Duke User Guide
+# Rucia Chatbot User Guide
 
-// Update the title above to match the actual product name
+![UI](ui.png)
 
-// Product screenshot goes here
+Rucia is a personal assistant chatbot designed to help users manage tasks and notes efficiently. It allows users to add, delete, and modify tasks such as To-Dos, Deadlines, and Events, while also supporting note-taking functionality.
 
-// Product intro goes here
+To get started, simply launch the chatbot and type help or ? to view a list of available commands.
 
 ## Adding deadlines
 
-// Describe the action and its outcome.
+To add a deadline, use the `deadline` keyword followed by the task description and the due date.
 
-// Give examples of usage
+Example: `deadline Submit assignment /by 2023-10-10`
 
-Example: `keyword (optional arguments)`
-
-// A description of the expected outcome goes here
+This will add a task with a deadline to the list of tasks.
 
 ```
 expected output
+Added deadline: Submit assignment (by: Oct 10 2023)
 ```
 
 ## Feature ABC

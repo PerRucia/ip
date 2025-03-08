@@ -27,10 +27,11 @@ public class HelpCommand implements Command {
                 + "6. unmark <task number> - Mark a task as not done\n"
                 + "7. delete <task number> - Delete a task\n"
                 + "8. list_day <dd/MM/yyyy> - List tasks for a specific day\n"
-                + "9. find <keyword> - Find tasks containing the keyword\n"
-                + "10. help notes - Show notes-related commands\n"
-                + "11. bye - Exit the application\n"
-                + "12. help or ? - Show this help message";
+                + "9. clear - Deletes all tasks\n"
+                + "10. find <keyword> - Find tasks containing the keyword\n"
+                + "11. help notes - Show notes-related commands\n"
+                + "12. bye - Exit the application\n"
+                + "13. help or ? - Show this help message";
         message.addMessage(helpMessage);
         return message.getMessage();
     }

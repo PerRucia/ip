@@ -42,14 +42,16 @@ list_day 13/03/2025
 ``` 
 ![Listing Tasks](ListTask.png)
 ### Deleting Tasks
-Tasks can be deleted with the `delete` command, followed by the task number. 
+Tasks can be deleted with the `delete` command, followed by the task number. If you need to delete all tasks, use the `clear` command.
 
 If you need to find out a task's number, use the `list` command.
 
 ### Example Usage
 ```
 delete 5
+clear
 ```
+![Deleting Tasks](DeleteTask.png)
 
 ### Marking Tasks
 Tasks can be marked and unmarked with the `mark` and `unmark` commands respectively, followed by the task number. 
@@ -61,6 +63,7 @@ If you need to find out a task's number, use the `list` command.
 mark 2
 unmark 5
 ```
+![Marking Tasks](MarkTask.png)
 
 ### Notes
 Rucia also supports the storing of notes. You can add a note with `note` and view a stored note with `view_note`, followed by the note number.
@@ -72,20 +75,55 @@ You can similarly use the ``notes`` command to find the number of a note.
 note Example Note /desc This is the contents of this note.
 view_note 1
 ```
+![Notes](Note.png)
 
 ## FAQ
+#### 1. How do I save my tasks and notes?
+Rucia automatically saves all tasks and notes whenever you add, modify, or delete them. You don’t need to manually save anything.
+
+#### 2. Can I edit a task or note after adding it?
+Currently, Rucia does not support editing tasks or notes. You will need to delete the existing task/note and create a new one with the updated details.
+
+#### 3. What happens if I close the application? Will I lose my data?
+No, Rucia automatically saves all tasks and notes, so your data will be available the next time you open the application.
+
+#### 4. How do I check which tasks I need to complete today?
+Use the `list_day <dd/mm/yyyy>` command to see all tasks scheduled for a specific day.
+
+#### 5. Is there a way to reset all tasks and notes?
+Yes, you can use the clear command to delete all tasks and `delete_note <note id>` to remove notes individually.
+
+#### 6. What should I do if Rucia doesn’t recognize my command?
+Ensure that you're typing the command correctly. You can type help to see the full list of commands.
+
+#### 7. Can I customize Rucia’s appearance or responses?
+Not at the moment, but future updates may include customization options. Stay tuned!
 
 ## Command Guide
 
-Below is a table of common commands:
+|Command|Description|Syntax|
+|--------------|-----------|-------|
+|help|Lists all available commands|`help`|
+|help notes| Lists all note-related commands`|`help notes`|
+|add|Adds a To-Do task|`add <task>`|
+|deadline|Adds a task with a deadline|`deadline <task> /b <date>`|
+|event| Adds a task with a start and end date|`event <task> /from <date> to <date>`|
+|list|Lists all added tasks|`list`|
+|list_day|Lists all tasks for a specified day|`list_day <date>`|
+|find|List all tasks matching any of the provided keywords|`find <keyword 1>, <keyword 2>, ...`
+|mark|Marks the specified task as completed|`mark <task id>`|
+|unmark|Marks the specified task as incomplete|`unmark <task id>`|
+|delete|Deletes the specified task|`delete <task id>`|
+|clear|Deletes all tasks|`clear`|
+|cheer|Sends a random motivational quote|`cheer`|
+|note|Adds a new note|`note <title> /desc <description>`|
+|notes|List all saved notes|`notes`|
+|view_note|View full details about the specified note|`view_note <note id>`|
+|delete_note|Deletes the specified note|`delete_note <note id>`|
+|bye|Exits the application|`bye`|
 
-|Command|Description|Example|
-|-------|-----------|-------|
-|add|Adds a To-Do task|`add Buy milk`|
-|deadline|Adds a task with a deadline|`deadline Complete homework /by 13/03/2025 2359`|
-|event| Adds a task with a start and end date|`event Vietnam holiday /from 15/03/2025 /to 21/03/2025`|
-|list|Lists all added tasks|
-|list_day
+
+
 
 
 

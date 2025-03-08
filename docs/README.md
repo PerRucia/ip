@@ -83,6 +83,9 @@ Below is a table of common commands:
 |-------|-----------|-------|
 |add|Adds a To-Do task|`add Buy milk`|
 |deadline|Adds a task with a deadline|`deadline Complete homework /by 13/03/2025 2359`|
+|event| Adds a task with a start and end date|`event Vietnam holiday /from 15/03/2025 /to 21/03/2025`|
+|list|Lists all added tasks|
+|list_day
 
 
 

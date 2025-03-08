@@ -29,7 +29,7 @@ public class HelpCommand implements Command {
                 + "8. list_day <dd/MM/yyyy> - List tasks for a specific day\n"
                 + "9. find <keyword> - Find tasks containing the keyword\n"
                 + "10. help notes - Show notes-related commands\n"
-                + "11. bye - Exit the application\\n\""
+                + "11. bye - Exit the application\n"
                 + "12. help or ? - Show this help message";
         message.addMessage(helpMessage);
         return message.getMessage();

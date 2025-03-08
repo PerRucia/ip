@@ -1,6 +1,6 @@
 # Rucia Chatbot User Guide
 
-![UI](ui.png)
+![UI](Ui.png)
 
 Rucia is a personal assistant chatbot designed to help users manage tasks and notes efficiently. It allows users to add, delete, and modify tasks such as To-Dos, Deadlines, and Events, while also supporting note-taking functionality.
 
@@ -79,7 +79,11 @@ view_note 1
 
 Below is a table of common commands:
 
-|Command|
+|Command|Description|Example|
+|-------|-----------|-------|
+|add|Adds a To-Do task|`add Buy milk`|
+|deadline|Adds a task with a deadline|`deadline Complete homework /by 13/03/2025 2359`|
+
 
 
 

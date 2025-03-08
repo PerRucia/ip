@@ -1,12 +1,9 @@
 package rucia.commands;
 
-import rucia.tasks.Task;
 import rucia.tasks.TaskList;
 import rucia.ui.Message;
 import rucia.utils.Storage;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Represents a command to delete a task from the task list.

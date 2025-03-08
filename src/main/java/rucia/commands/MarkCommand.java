@@ -51,7 +51,7 @@ public class MarkCommand implements Command {
         taskList.markTask(taskIndex);
         try {
             TaskStorageUtil.saveEntries(taskList, storage);
-            message.addMessage("Marked task as done - " + taskList.getTask(taskIndex));
+            message.addMessage("Marked task as done " + taskList.getTask(taskIndex));
             message.addMessage("Finally, some progress.");
         } catch (IOException e) {
             return Message.showError(e.getMessage());

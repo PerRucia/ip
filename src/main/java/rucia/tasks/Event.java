@@ -70,7 +70,7 @@ public class Event extends Task {
     public String toString() {
         LocalDateTime fromDateTime = LocalDateTime.ofEpochSecond(fromTimestamp, 0, ZoneOffset.UTC);
         LocalDateTime toDateTime = LocalDateTime.ofEpochSecond(toTimestamp, 0, ZoneOffset.UTC);
-        return String.format("[%s][%s] %s (from: %s to: %s)", getType(), isDone ? "X" : " ", description, fromDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mma")), toDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mma")));
+        return String.format("%s - %s (from: %s to: %s)", isDone ? "✅" : "❌", description, fromDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mma")), toDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mma")));
     }
 
     /**

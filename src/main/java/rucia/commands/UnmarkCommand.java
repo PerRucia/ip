@@ -51,7 +51,7 @@ public class UnmarkCommand implements Command {
         taskList.unmarkTask(taskIndex);
         try {
             TaskStorageUtil.saveEntries(taskList, storage);
-            message.addMessage("Unmarked task as not done - " + taskList.getTask(taskIndex));
+            message.addMessage("Unmarked task as not done " + taskList.getTask(taskIndex));
             message.addMessage("You're back to square one.");
         } catch (IOException e) {
             return Message.showError(e.getMessage());

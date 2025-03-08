@@ -53,7 +53,7 @@ shadowJar {
     archiveVersion.set('1.0')
 
     manifest {
-        attributes 'Main-Class': 'Rucia'  // Entry point for the JAR
+        attributes 'Main-Class': 'rucia.ui.Launcher'  // Entry point for the JAR
     }
 
     mergeServiceFiles()  // Helps to avoid Java Service conflicts

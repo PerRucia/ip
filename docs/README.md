@@ -94,7 +94,7 @@ Use the `list_day <dd/mm/yyyy>` command to see all tasks scheduled for a specifi
 Yes, you can use the clear command to delete all tasks and `delete_note <note id>` to remove notes individually.
 
 #### 6. What should I do if Rucia doesn’t recognize my command?
-Ensure that you're typing the command correctly. You can type help to see the full list of commands.
+Ensure that you're typing the command correctly. You can type `help` or `?` to see the full list of commands.
 
 #### 7. Can I customize Rucia’s appearance or responses?
 Not at the moment, but future updates may include customization options. Stay tuned!
